@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="R">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DropStore">
+<meta name="theme-color" content="#0D1B2A">
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1170/1170678.png">
+
+<title>DropStore &mdash; Shop Smart, Save More</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F8F9FA;--wh:#fff;--s1:#F1F3F5;--s2:#E9ECEF;--bd:#DEE2E6;--tx:#212529;--tx2:#495057;--tx3:#868E96;--pr:#0D1B2A;--ac:#E8A000;--acd:#C87000;--acl:#FFF3CD;--rd:#DC3545;--gn:#198754;--sh0:0 1px 3px rgba(0,0,0,.07);--sh1:0 4px 12px rgba(0,0,0,.09);--sh2:0 12px 32px rgba(0,0,0,.12);--sh3:0 24px 56px rgba(0,0,0,.16);--r:12px;--rs:8px;--rl:18px;--rf:9999px;--tr:.2s ease}
+html[lang=ar]{direction:rtl}html[lang=en]{direction:ltr}
+html[lang=ar] body,html[lang=ar] button,html[lang=ar] input,html[lang=ar] select{font-family:"Cairo",sans-serif}
+html[lang=en] body,html[lang=en] button,html[lang=en] input,html[lang=en] select{font-family:"Plus Jakarta Sans",sans-serif}
+body{background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;font-size:14px}
+img{display:block;object-fit:cover}
+button{cursor:pointer;border:none;outline:none;font-family:inherit}
+input,select{font-family:inherit;outline:none}
+a{text-decoration:none;color:inherit}
+.ann{background:var(--pr);color:rgba(255,255,255,.8);text-align:center;padding:9px 16px;font-size:12px;font-weight:500}
+.ann strong{color:var(--ac)}.asep{margin:0 10px;opacity:.25}
+.nav{background:var(--wh);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:200;box-shadow:var(--sh0)}
+.navw{max-width:1280px;margin:0 auto;padding:0 20px;height:62px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.logo-ico{width:36px;height:36px;background:var(--pr);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.logo-txt{font-size:20px;font-weight:900;color:var(--pr);letter-spacing:-.5px}
+.logo-txt em{color:var(--ac);font-style:normal}
+.srchw{flex:1;max-width:420px;position:relative}
+.srchw input{width:100%;height:40px;border:1.5px solid var(--bd);border-radius:var(--rf);font-size:13px;background:var(--s1);color:var(--tx);transition:var(--tr)}
+html[lang=en] .srchw input{padding:0 42px 0 16px}html[lang=ar] .srchw input{padding:0 16px 0 42px}
+.srchw input:focus{border-color:var(--ac);background:var(--wh);box-shadow:0 0 0 3px rgba(232,160,0,.12)}
+.srchw input::placeholder{color:var(--tx3)}
+.sico{position:absolute;top:50%;transform:translateY(-50%);color:var(--tx3);font-size:14px;pointer-events:none}
+html[lang=en] .sico{right:13px}html[lang=ar] .sico{left:13px}
+.navr{display:flex;align-items:center;gap:8px}
+html[lang=en] .navr{margin-left:auto}html[lang=ar] .navr{margin-right:auto}
+.icobtn{position:relative;width:40px;height:40px;border-radius:var(--rs);border:1.5px solid var(--bd);background:var(--wh);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--tx2);transition:var(--tr)}
+.icobtn:hover{border-color:var(--ac);background:var(--acl)}
+.nbdg{position:absolute;top:-5px;background:var(--rd);color:#fff;border-radius:var(--rf);min-width:17px;height:17px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--wh)}
+html[lang=en] .nbdg{right:-5px}html[lang=ar] .nbdg{left:-5px}
+.cartbtn{display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;background:var(--pr);color:#fff;border-radius:var(--rs);font-size:13px;font-weight:700;transition:var(--tr)}
+.cartbtn:hover{background:#1a2f45}
+.cbdg{background:var(--ac);color:var(--pr);border-radius:var(--rf);min-width:20px;height:20px;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.langbtn{height:40px;padding:0 13px;border:1.5px solid var(--bd);border-radius:var(--rs);background:var(--wh);font-size:12px;font-weight:700;color:var(--tx2);display:flex;align-items:center;gap:5px;transition:var(--tr)}
+.langbtn:hover{border-color:var(--ac);color:var(--acd)}
+.hero{background:var(--pr);position:relative;overflow:hidden;min-height:380px;display:flex;align-items:center}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(232,160,0,.1),transparent 55%)}
+.hslides{width:100%;position:relative;z-index:1}
+.hslide{display:none}.hslide.on{display:block}
+.hinner{max-width:1280px;margin:0 auto;padding:48px 20px 56px;display:flex;align-items:center;gap:48px}
+.htxt{flex:1;min-width:0}
+.htag{display:inline-flex;align-items:center;gap:6px;background:rgba(232,160,0,.15);border:1px solid rgba(232,160,0,.3);color:var(--ac);padding:5px 14px;border-radius:var(--rf);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:16px}
+.htitle{font-size:clamp(24px,4vw,46px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:12px}
+.htitle em{color:var(--ac);font-style:normal}
+.hdesc{color:rgba(255,255,255,.55);font-size:14px;line-height:1.75;margin-bottom:24px;max-width:420px}
+.hbtns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.hbtn{height:44px;padding:0 24px;border-radius:var(--r);font-size:13px;font-weight:700;transition:var(--tr);display:inline-flex;align-items:center;gap:7px}
+.hbtn.solid{background:var(--ac);color:var(--pr)}.hbtn.solid:hover{background:var(--acd);transform:translateY(-1px);box-shadow:0 8px 20px rgba(232,160,0,.35)}
+.hbtn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.25)}.hbtn.ghost:hover{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.06)}
+.hstats{display:flex;gap:26px}
+.hstat .n{font-size:21px;font-weight:800;color:#fff;line-height:1}.hstat .l{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
+.hvis{flex-shrink:0;width:270px;height:230px;position:relative}
+.hvis-img{width:100%;height:100%;border-radius:var(--rl);overflow:hidden;box-shadow:var(--sh3)}
+.hvis-img img{width:100%;height:100%}
+.hfloat{position:absolute;bottom:-14px;background:var(--wh);border-radius:var(--r);padding:11px 15px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh2);min-width:165px}
+html[lang=en] .hfloat{right:16px}html[lang=ar] .hfloat{left:16px}
+.hfl{font-size:11px;color:var(--tx3);margin-bottom:2px}.hfv{font-size:13px;font-weight:800;color:var(--tx)}
+.hdots{display:flex;gap:7px;margin-top:20px}
+.hdot{width:7px;height:7px;border-radius:var(--rf);background:rgba(255,255,255,.25);cursor:pointer;transition:var(--tr);border:none;padding:0}
+.hdot.on{background:var(--ac);width:22px}
+.flash{background:linear-gradient(90deg,#B91C1C,#DC2626);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:16px;font-size:13px;font-weight:600;flex-wrap:wrap}
+.ftmr{display:flex;gap:4px;align-items:center}
+.ftb{background:rgba(0,0,0,.22);padding:3px 9px;border-radius:5px;font-size:15px;font-weight:800;min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.fts{font-size:15px;font-weight:800;opacity:.65}
+.page{max-width:1280px;margin:0 auto;padding:32px 20px}
+.sectitle{font-size:17px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:9px}
+.stbar{width:4px;height:20px;background:var(--ac);border-radius:2px;flex-shrink:0}
+.catrow{display:flex;gap:8px;overflow-x:auto;padding-bottom:3px;margin-bottom:26px;scrollbar-width:none}
+.catrow::-webkit-scrollbar{display:none}
+.catbtn{flex-shrink:0;display:flex;align-items:center;gap:7px;padding:9px 16px;background:var(--wh);border:1.5px solid var(--bd);border-radius:var(--rf);font-size:13px;font-weight:600;color:var(--tx2);cursor:pointer;transition:var(--tr);white-space:nowrap}
+.catbtn:hover{border-color:var(--ac);color:var(--acd);background:var(--acl)}
+.catbtn.on{background:var(--pr);border-color:var(--pr);color:#fff}
+.ck{padding:1px 7px;border-radius:var(--rf);font-size:10px;font-weight:700}
+.catbtn.on .ck{background:rgba(255,255,255,.15)}.catbtn:not(.on) .ck{background:var(--s1);color:var(--tx3)}
+.prodbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.prodcnt{font-size:13px;color:var(--tx3);font-weight:500}
+.sortsel{height:36px;padding:0 12px;border:1.5px solid var(--bd);border-radius:var(--rs);font-size:12px;font-weight:600;background:var(--wh);color:var(--tx);cursor:pointer}
+.sortsel:focus{border-color:var(--ac)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.pcard{background:var(--wh);border-radius:var(--rl);overflow:hidden;border:1px solid var(--bd);box-shadow:var(--sh0);transition:all .25s ease;cursor:pointer}
+.pcard:hover{transform:translateY(-5px);box-shadow:var(--sh3);border-color:transparent}
+.pimg{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--s1)}
+.pimg img{width:100%;height:100%;transition:transform .4s ease}
+.pcard:hover .pimg img{transform:scale(1.06)}
+.pfbk{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:58px;background:linear-gradient(135deg,var(--s1),var(--s2))}
+.pbdgs{position:absolute;top:9px;display:flex;flex-direction:column;gap:3px}
+html[lang=en] .pbdgs{left:9px}html[lang=ar] .pbdgs{right:9px}
+.pbdg{padding:3px 9px;border-radius:var(--rf);font-size:10px;font-weight:700}
+.pbdg-s{background:var(--rd);color:#fff}.pbdg-n{background:var(--gn);color:#fff}.pbdg-h{background:var(--ac);color:var(--pr)}
+.pwish{position:absolute;top:9px;width:32px;height:32px;border-radius:var(--rf);background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:var(--sh1);transition:var(--tr);opacity:0}
+html[lang=en] .pwish{right:9px}html[lang=ar] .pwish{left:9px}
+.pcard:hover .pwish,.pwish.on{opacity:1}.pwish:hover{transform:scale(1.12)}
+.pquick{position:absolute;bottom:0;left:0;right:0;background:rgba(13,27,42,.88);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:700;padding:11px;text-align:center;transform:translateY(100%);transition:transform .25s ease;cursor:pointer;border:none;font-family:inherit}
+.pcard:hover .pquick{transform:translateY(0)}
+.pbody{padding:13px 15px 15px}
+.pcat{font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+.pname{font-size:13px;font-weight:700;color:var(--tx);line-height:1.45;margin-bottom:8px;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pmeta{display:flex;align-items:center;gap:5px;margin-bottom:8px;flex-wrap:wrap}
+.pstars{color:#FBBF24;font-size:11px;letter-spacing:1px}
+.pratev{font-size:12px;font-weight:700;color:var(--tx2)}.pratec{font-size:11px;color:var(--tx3)}
+.psold{font-size:11px;color:var(--tx3)}.psold::before{content:"\B7";margin:0 3px}
+.pprices{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:11px}
+.pcur{font-size:19px;font-weight:900;color:var(--tx);letter-spacing:-.2px}
+.pwas{font-size:12px;color:var(--tx3);text-decoration:line-through}
+.psave{font-size:10px;font-weight:700;background:#FEF2F2;color:var(--rd);padding:2px 7px;border-radius:var(--rf)}
+.pfoot{display:flex;gap:7px}
+.btnadd{flex:1;height:38px;background:var(--pr);color:#fff;border-radius:var(--rs);font-size:12px;font-weight:700;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:5px}
+.btnadd:hover{background:#1a2f45}
+.btnfav{width:38px;height:38px;border:1.5px solid var(--bd);border-radius:var(--rs);background:var(--wh);font-size:15px;transition:var(--tr);display:flex;align-items:center;justify-content:center}
+.btnfav:hover{border-color:var(--rd);background:#FFF5F5}
+.promos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+.promo{border-radius:var(--rl);position:relative;min-height:150px;display:flex;align-items:center;padding:26px 22px;cursor:pointer;transition:var(--tr);overflow:hidden}
+.promo:hover{transform:translateY(-3px);box-shadow:var(--sh3)}
+.prom-a{background:linear-gradient(135deg,#7C2D12,#EA580C)}.prom-b{background:linear-gradient(135deg,#0F172A,#1E293B)}
+.pdeco{position:absolute;font-size:88px;opacity:.1;line-height:1}
+html[lang=en] .pdeco{right:-6px;bottom:-6px}html[lang=ar] .pdeco{left:-6px;bottom:-6px}
+.prombody{position:relative;z-index:1;color:#fff}
+.ptag{font-size:10px;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:7px}
+.ptitle{font-size:19px;font-weight:900;margin-bottom:5px;line-height:1.2}
+.psub{font-size:12px;opacity:.7;margin-bottom:14px;line-height:1.5}
+.pbtn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:var(--rf);font-size:12px;font-weight:700;background:rgba(255,255,255,.18);color:#fff;cursor:pointer;border:none;font-family:inherit;transition:var(--tr)}
+.pbtn:hover{background:rgba(255,255,255,.32)}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:36px;padding:20px;background:var(--wh);border-radius:var(--rl);border:1px solid var(--bd)}
+.titem{display:flex;align-items:center;gap:11px}
+.tico{font-size:24px;flex-shrink:0}.tlbl{font-size:12px;font-weight:700;color:var(--tx);margin-bottom:2px}.tsub{font-size:11px;color:var(--tx3)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s ease;backdrop-filter:blur(3px)}
+.ov.on{opacity:1;pointer-events:all}
+.drawer{position:fixed;top:0;bottom:0;width:min(400px,100vw);background:var(--wh);z-index:301;display:flex;flex-direction:column;box-shadow:var(--sh3);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+html[lang=en] .drawer{right:0;transform:translateX(100%)}html[lang=ar] .drawer{left:0;transform:translateX(-100%)}
+.drawer.on{transform:translateX(0)!important}
+.drhdr{padding:18px 20px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.drtitle{font-size:16px;font-weight:800}
+.xbtn{width:32px;height:32px;border-radius:var(--rs);border:1.5px solid var(--bd);background:var(--wh);font-size:14px;color:var(--tx2);display:flex;align-items:center;justify-content:center;transition:var(--tr);cursor:pointer}
+.xbtn:hover{background:var(--s1)}
+.drbody{flex:1;overflow-y:auto;padding:16px 20px}
+.cempty{text-align:center;padding:48px 16px;color:var(--tx3)}
+.cempty .cei{font-size:50px;margin-bottom:11px;display:block}
+.cempty p{font-size:15px;font-weight:700;color:var(--tx2);margin-bottom:5px}
+.citem{display:flex;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid var(--bd)}
+.cimg{width:58px;height:58px;border-radius:var(--rs);overflow:hidden;background:var(--s1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px}
+.cimg img{width:100%;height:100%}
+.cinfo{flex:1;min-width:0}.cname{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}.cprice{font-size:14px;font-weight:800;color:var(--tx)}
+.cqty{display:flex;align-items:center;gap:7px;background:var(--s1);border-radius:var(--rs);padding:4px 9px}
+.cqb{width:22px;height:22px;background:var(--wh);border:1px solid var(--bd);border-radius:5px;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:var(--tr);cursor:pointer}
+.cqb:hover{border-color:var(--ac);color:var(--acd)}.cqn{font-size:13px;font-weight:700;min-width:18px;text-align:center}
+.drfoot{padding:16px 20px;border-top:1px solid var(--bd);background:var(--bg)}
+.cpnrow{display:flex;gap:7px;margin-bottom:14px}
+.cpninp{flex:1;height:38px;padding:0 12px;border:1.5px solid var(--bd);border-radius:var(--rs);font-size:12px;transition:var(--tr);text-transform:uppercase;background:var(--wh)}
+.cpninp::placeholder{text-transform:none;color:var(--tx3)}.cpninp:focus{border-color:var(--ac)}
+.cpnbtn{height:38px;padding:0 14px;border:1.5px solid var(--bd);border-radius:var(--rs);font-size:12px;font-weight:700;background:var(--wh);cursor:pointer;transition:var(--tr)}
+.cpnbtn:hover{border-color:var(--ac);color:var(--acd)}
+.tots{margin-bottom:14px}
+.trow{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;color:var(--tx2)}
+.trow.fin{font-size:16px;font-weight:800;color:var(--tx);border-top:1px solid var(--bd);margin-top:9px;padding-top:11px}
+.paybtn{width:100%;height:50px;background:var(--pr);color:#fff;border-radius:var(--r);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:7px;transition:var(--tr);border:none;font-family:inherit;cursor:pointer}
+.paybtn:hover{background:#1a2f45;transform:translateY(-1px)}
+.sectxt{text-align:center;font-size:11px;color:var(--tx3);margin-top:9px;display:flex;align-items:center;justify-content:center;gap:4px}
+.pgov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;display:flex;align-items:center;justify-content:center;padding:12px;opacity:0;pointer-events:none;transition:opacity .3s ease;backdrop-filter:blur(4px)}
+.pgov.on{opacity:1;pointer-events:all}
+.pdmodal{background:var(--wh);border-radius:var(--rl);width:100%;max-width:820px;max-height:94vh;overflow-y:auto;box-shadow:var(--sh3);animation:mdin .3s ease}
+@keyframes mdin{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
+.pdgrid{display:grid;grid-template-columns:1fr 1fr}
+.pd-left{background:var(--s1)}
+.pd-main{aspect-ratio:1/1;overflow:hidden;position:relative}
+.pd-main img{width:100%;height:100%}
+.pd-thumbs{display:flex;gap:6px;padding:10px 12px;border-top:1px solid var(--bd);background:var(--wh)}
+.pd-thumb{width:58px;height:58px;border-radius:var(--rs);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:var(--tr);flex-shrink:0;background:var(--s1)}
+.pd-thumb img{width:100%;height:100%}.pd-thumb.on{border-color:var(--ac)}
+.pd-body{padding:22px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;max-height:580px}
+.pd-bdgs{display:flex;gap:6px;flex-wrap:wrap}
+.pd-name{font-size:18px;font-weight:900;line-height:1.3;color:var(--tx)}
+.pd-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pd-prow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pd-now{font-size:26px;font-weight:900;color:var(--tx);letter-spacing:-.3px}
+.pd-was{font-size:14px;color:var(--tx3);text-decoration:line-through}
+.pd-sv{background:#FEF2F2;color:var(--rd);font-size:12px;font-weight:700;padding:3px 10px;border-radius:var(--rf)}
+.pd-desc{font-size:13px;color:var(--tx2);line-height:1.8;padding:12px;background:var(--s1);border-radius:var(--rs)}
+.pd-bullets{list-style:none;display:flex;flex-direction:column;gap:7px}
+.pd-bullets li{font-size:13px;color:var(--tx2);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.pd-bullets li::before{content:"\2713";color:var(--gn);font-weight:800;flex-shrink:0;margin-top:1px}
+.pd-specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.pd-spec{background:var(--s1);border-radius:var(--rs);padding:9px 12px}
+.pd-sl{font-size:10px;color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.pd-sv2{font-size:13px;font-weight:700;color:var(--tx)}
+.pd-stk{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.pd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}.pd-dot.ok{background:var(--gn)}.pd-dot.low{background:#F59E0B}
+.pd-acts{display:flex;gap:10px}
+.pd-ship{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--bd);padding-top:12px}
+.pd-si{font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:6px}
+.ckmodal{background:var(--wh);border-radius:var(--rl);width:100%;max-width:480px;max-height:92vh;overflow-y:auto;box-shadow:var(--sh3);animation:mdin .3s ease}
+.cmhdr{padding:18px 22px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.cmtitle{font-size:16px;font-weight:800}.cmbody{padding:22px}
+.fgrp{margin-bottom:15px}
+.flbl{font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:6px;display:block;text-transform:uppercase;letter-spacing:.5px}
+.finp{width:100%;height:42px;padding:0 14px;border:1.5px solid var(--bd);border-radius:var(--rs);font-size:14px;transition:var(--tr);background:var(--s1)}
+.finp:focus{border-color:var(--ac);background:var(--wh);box-shadow:0 0 0 3px rgba(232,160,0,.1)}
+.osum{background:var(--s1);border-radius:var(--r);padding:15px;margin-bottom:18px}
+.ostitle{font-size:13px;font-weight:700;margin-bottom:10px}
+.ositem{display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);padding:3px 0}
+.ostot{display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:var(--tx);border-top:1px solid var(--bd);margin-top:9px;padding-top:9px}
+.divider{display:flex;align-items:center;gap:12px;margin:14px 0;color:var(--tx3);font-size:12px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--bd)}
+.ppbtn{width:100%;height:50px;background:#0070BA;color:#fff;border-radius:var(--r);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;font-family:inherit;border:none;cursor:pointer;transition:var(--tr)}
+.ppbtn:hover{background:#005ea6;transform:translateY(-1px)}
+.pmethods{display:flex;justify-content:center;gap:8px;margin-top:10px;opacity:.45;font-size:22px}
+.chatbtn{position:fixed;bottom:24px;z-index:250;width:54px;height:54px;background:var(--pr);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:var(--sh2);border:2px solid rgba(255,255,255,.15);transition:var(--tr)}
+html[lang=en] .chatbtn{right:24px}html[lang=ar] .chatbtn{left:24px}
+.chatbtn:hover{transform:scale(1.08)}
+.chatw{position:fixed;bottom:90px;z-index:250;width:min(340px,calc(100vw - 32px));background:var(--wh);border-radius:var(--rl);box-shadow:var(--sh3);display:flex;flex-direction:column;overflow:hidden;transform:scale(.9) translateY(20px);transform-origin:bottom;opacity:0;pointer-events:none;transition:all .25s ease;border:1px solid var(--bd)}
+html[lang=en] .chatw{right:16px}html[lang=ar] .chatw{left:16px}
+.chatw.on{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.chathdr{background:var(--pr);padding:13px 16px;display:flex;align-items:center;gap:11px}
+.chatav{width:38px;height:38px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.chatname{color:#fff;font-size:14px;font-weight:700}.chatstatus{color:rgba(255,255,255,.6);font-size:11px;margin-top:2px}
+.chatmsg{flex:1;overflow-y:auto;padding:13px;display:flex;flex-direction:column;gap:8px;max-height:270px}
+.chatmsg::-webkit-scrollbar{width:3px}.chatmsg::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
+.msg{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.55}
+.msg.bot{background:var(--s1);color:var(--tx);align-self:flex-start}.msg.usr{background:var(--pr);color:#fff;align-self:flex-end}
+.chatqas{padding:9px 13px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--bd)}
+.chatqa{padding:5px 11px;border:1.5px solid var(--bd);border-radius:var(--rf);font-size:11px;font-weight:600;color:var(--tx2);background:var(--wh);cursor:pointer;transition:var(--tr)}
+.chatqa:hover{border-color:var(--ac);color:var(--acd);background:var(--acl)}
+.chatinprow{padding:9px 13px;border-top:1px solid var(--bd);display:flex;gap:7px}
+.chatinp{flex:1;height:36px;padding:0 12px;border:1.5px solid var(--bd);border-radius:var(--rf);font-size:13px;background:var(--s1);transition:var(--tr)}
+.chatinp:focus{border-color:var(--ac);background:var(--wh)}.chatinp::placeholder{color:var(--tx3)}
+.chatsend{width:36px;height:36px;background:var(--pr);border-radius:var(--rf);color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer}
+.chatsend:hover{background:#1a2f45}
+footer{background:var(--pr);color:rgba(255,255,255,.55);margin-top:56px}
+.ftop{max-width:1280px;margin:0 auto;padding:44px 20px 32px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.fdesc{font-size:12px;line-height:1.8;opacity:.55;margin-top:11px;max-width:260px}
+.fcol h5{color:#fff;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:12px}
+.fcol ul{list-style:none}.fcol li{margin-bottom:8px}
+.fcol a{font-size:12px;opacity:.55;transition:opacity .2s;cursor:pointer;display:inline-block}.fcol a:hover{opacity:1}
+.fbot{border-top:1px solid rgba(255,255,255,.08);max-width:1280px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-size:11px;opacity:.4;flex-wrap:wrap;gap:8px}
+.toasts{position:fixed;bottom:22px;z-index:600;display:flex;flex-direction:column;gap:7px;pointer-events:none}
+html[lang=en] .toasts{left:20px}html[lang=ar] .toasts{right:20px}
+.toast{display:flex;align-items:flex-start;gap:9px;background:var(--pr);color:#fff;padding:11px 16px;border-radius:var(--r);font-size:12px;font-weight:500;box-shadow:var(--sh2);max-width:280px;animation:tin .3s ease;line-height:1.5}
+.toast.ok{background:#064E3B;border-left:3px solid var(--gn)}.toast.er{background:#7F1D1D;border-left:3px solid var(--rd)}.toast.wn{background:#78350F;border-left:3px solid var(--ac)}
+@keyframes tin{from{transform:translateX(16px);opacity:0}to{transform:translateX(0);opacity:1}}
+@media(max-width:1024px){.ftop{grid-template-columns:1fr 1fr;gap:24px}}
+@media(max-width:768px){.hinner{flex-direction:column;padding:32px 16px 50px;gap:24px}.hvis{width:100%;max-width:260px;height:190px}.hfloat{display:none}.promos{grid-template-columns:1fr}.trust{grid-template-columns:1fr 1fr}.ftop{grid-template-columns:1fr;gap:20px}.pgrid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}.pdgrid{grid-template-columns:1fr}.pd-body{max-height:none;padding:16px}}
+@media(max-width:540px){.navw{gap:9px}.srchw{max-width:150px}.langbtn span{display:none}.pgrid{grid-template-columns:repeat(2,1fr);gap:10px}.pbody{padding:10px 10px 12px}.pcur{font-size:17px}.trust{grid-template-columns:1fr}.hstats{gap:16px}}
+
+/* iOS Optimizations */
+@supports (-webkit-touch-callout: none) {
+  body { -webkit-tap-highlight-color: transparent; }
+  .pcard { -webkit-transform: translateZ(0); }
+  button, .btnadd, .paybtn { -webkit-appearance: none; }
+  input, select { -webkit-appearance: none; border-radius: var(--rs); }
+  .srchw input { -webkit-appearance: none; }
+}
+/* Prevent zoom on input focus */
+@media screen and (max-width: 768px) {
+  input, select, textarea { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+<div class="ann">
+  <span id="ann1">&#127873; Free shipping on orders over $50</span><span class="asep">|</span>
+  <span id="ann2">Use code <strong>SAVE20</strong> for 20% off</span><span class="asep">|</span>
+  <span id="ann3">&#11088; 5000+ happy customers</span>
+</div>
+<nav class="nav"><div class="navw">
+  <a class="logo" href="#"><div class="logo-ico">&#128717;</div><span class="logo-txt">Drop<em>Store</em></span></a>
+  <div class="srchw"><span class="sico">&#128269;</span>
+    <input type="text" id="SI" placeholder="Search for a product..." oninput="lsrch(this.value)" onkeydown="if(event.key==='Enter')dosrch()">
+  </div>
+  <div class="navr">
+    <button class="langbtn" id="LB" onclick="togLang()">AR &#127760;</button>
+    <button class="icobtn" onclick="openCart()">&#128722;<span class="nbdg" id="NB" style="display:none">0</span></button>
+    <button class="cartbtn" onclick="openCart()"><span id="cartLbl">Cart</span><span class="cbdg" id="CC">0</span></button>
+  </div>
+</div></nav>
+<section class="hero"><div class="hslides">
+  <div class="hslide on" id="hs0"><div class="hinner">
+    <div class="htxt">
+      <div class="htag" id="ht0">&#9889; Best Sellers 2026</div>
+      <h1 class="htitle">Shop Smart<br>Save More with<br><em>DropStore</em></h1>
+      <p class="hdesc" id="hp0">The best hand-picked products at unbeatable prices with fast delivery to your door.</p>
+      <div class="hbtns">
+        <button class="hbtn solid" onclick="goProds()">&#128717; <span id="shopNow">Shop Now</span></button>
+        <button class="hbtn ghost" onclick="filterCat('',null)">&#128293; <span id="deals">Deals</span></button>
+      </div>
+      <div class="hstats">
+        <div class="hstat"><div class="n">20+</div><div class="l" id="st1">Products</div></div>
+        <div class="hstat"><div class="n">5K+</div><div class="l" id="st2">Customers</div></div>
+        <div class="hstat"><div class="n">4.8&#9733;</div><div class="l" id="st3">Rating</div></div>
+      </div>
+      <div class="hdots" id="HD"></div>
+    </div>
+    <div class="hvis">
+      <div class="hvis-img"><img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=85" alt="" onerror="this.parentElement.style.background='#1a2f45'"></div>
+      <div class="hfloat"><span style="font-size:26px">&#11088;</span><div><div class="hfl" id="hfl">Customer Rating</div><div class="hfv">4.8 / 5.0 (5,000+)</div></div></div>
+    </div>
+  </div></div>
+  <div class="hslide" id="hs1"><div class="hinner">
+    <div class="htxt">
+      <div class="htag" id="ht1">Beauty &amp; Care</div>
+      <h1 class="htitle">Real Beauty<br>Direct from<br><em>the Source</em></h1>
+      <p class="hdesc" id="hp1">Premium skincare from top global sources at incredible prices.</p>
+      <div class="hbtns"><button class="hbtn solid" onclick="filterCat('beauty',null);goProds()"><span id="shopB">Shop Beauty</span></button></div>
+    </div>
+    <div class="hvis"><div class="hvis-img"><img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=600&q=85" alt="" onerror="this.parentElement.style.background='#1a2f45'"></div></div>
+  </div></div>
+  <div class="hslide" id="hs2"><div class="hinner">
+    <div class="htxt">
+      <div class="htag" id="ht2">Tech 2026</div>
+      <h1 class="htitle">Latest Devices<br>at the Best<br><em>Prices</em></h1>
+      <p class="hdesc" id="hp2">Smartwatches, headphones, and tech accessories at unbeatable prices.</p>
+      <div class="hbtns"><button class="hbtn solid" onclick="filterCat('tech',null);goProds()"><span id="shopT">Shop Tech</span></button></div>
+    </div>
+    <div class="hvis"><div class="hvis-img"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=85" alt="" onerror="this.parentElement.style.background='#1a2f45'"></div></div>
+  </div></div>
+</div></section>
+<div class="flash">
+  <span id="fl">Offer ends in:</span>
+  <div class="ftmr"><div class="ftb" id="FH">08</div><div class="fts">:</div><div class="ftb" id="FM">34</div><div class="fts">:</div><div class="ftb" id="FS">00</div></div>
+  <span id="fr">Up to 50% off selected products &#128293;</span>
+</div>
+<main class="page">
+  <div style="margin-bottom:14px"><h2 class="sectitle"><span class="stbar"></span><span id="byCat">Shop by Category</span></h2></div>
+  <div class="catrow">
+    <button class="catbtn on" onclick="filterCat('all',this)">&#128717; <span id="cAll">All</span><span class="ck">20</span></button>
+    <button class="catbtn" onclick="filterCat('health',this)">&#128154; <span id="cH">Health</span><span class="ck">4</span></button>
+    <button class="catbtn" onclick="filterCat('tech',this)">&#128241; <span id="cT">Tech</span><span class="ck">5</span></button>
+    <button class="catbtn" onclick="filterCat('beauty',this)">&#10024; <span id="cB">Beauty</span><span class="ck">4</span></button>
+    <button class="catbtn" onclick="filterCat('home',this)">&#127968; <span id="cHm">Home</span><span class="ck">3</span></button>
+    <button class="catbtn" onclick="filterCat('sports',this)">&#127947; <span id="cSp">Sports</span><span class="ck">3</span></button>
+  </div>
+  <div id="PS">
+    <div class="prodbar">
+      <h2 class="sectitle"><span class="stbar"></span><span id="allP">All Products</span></h2>
+      <div style="display:flex;align-items:center;gap:9px">
+        <span class="prodcnt" id="PC">20 items</span>
+        <select class="sortsel" onchange="sortP(this.value)">
+          <option value="">Sort by</option><option value="pa">Price &#8593;</option>
+          <option value="pd">Price &#8595;</option><option value="r">Top Rated</option><option value="s">Best Selling</option>
+        </select>
+      </div>
+    </div>
+    <div id="PG" class="pgrid"></div>
+  </div>
+  <div class="promos">
+    <div class="promo prom-a" onclick="filterCat('health',null);goProds()">
+      <span class="pdeco">&#128134;</span>
+      <div class="prombody"><div class="ptag" id="pt0">Best Seller</div><div class="ptitle" id="ptit0">Smart Eye Massager</div><div class="psub" id="psb0">44% off &#8212; Limited time</div><button class="pbtn" id="pb0">Order Now &#8594;</button></div>
+    </div>
+    <div class="promo prom-b" onclick="filterCat('beauty',null);goProds()">
+      <span class="pdeco">&#10024;</span>
+      <div class="prombody"><div class="ptag" id="pt1">4.9 &#11088; Over 3000 reviews</div><div class="ptitle" id="ptit1">Collagen Serum</div><div class="psub" id="psb1">Visible results in 4 weeks</div><button class="pbtn" id="pb1">Discover Now &#8594;</button></div>
+    </div>
+  </div>
+  <div class="trust">
+    <div class="titem"><span class="tico">&#128666;</span><div><div class="tlbl" id="tr1">Fast Shipping</div><div class="tsub" id="tr1s">5-7 business days</div></div></div>
+    <div class="titem"><span class="tico">&#128274;</span><div><div class="tlbl" id="tr2">Secure Payment</div><div class="tsub" id="tr2s">Encrypted &amp; trusted</div></div></div>
+    <div class="titem"><span class="tico">&#8617;&#65039;</span><div><div class="tlbl" id="tr3">Free Returns</div><div class="tsub" id="tr3s">Within 30 days</div></div></div>
+    <div class="titem"><span class="tico">&#127911;</span><div><div class="tlbl" id="tr4">24/7 Support</div><div class="tsub">dropstore.hello@gmail.com</div></div></div>
+  </div>
+</main>
+<footer>
+  <div class="ftop">
+    <div><div class="logo-txt" style="font-size:20px;color:#fff">Drop<em>Store</em></div>
+      <p class="fdesc" id="fdesc">Your trusted store for carefully selected products. High quality, competitive prices, fast delivery.</p></div>
+    <div class="fcol"><h5 id="fsh">Shop</h5><ul>
+      <li><a onclick="filterCat('health',null);goProds()" id="ff1">Health &amp; Fitness</a></li>
+      <li><a onclick="filterCat('tech',null);goProds()" id="ff2">Tech &amp; Devices</a></li>
+      <li><a onclick="filterCat('beauty',null);goProds()" id="ff3">Beauty &amp; Care</a></li>
+      <li><a onclick="filterCat('home',null);goProds()" id="ff4">Home &amp; Kitchen</a></li>
+      <li><a onclick="filterCat('sports',null);goProds()" id="ff5">Sports &amp; Fitness</a></li>
+    </ul></div>
+    <div class="fcol"><h5 id="fcs">Customer Service</h5><ul>
+      <li><a onclick="openChat()" id="fc1">Track Order</a></li>
+      <li><a onclick="openChat()" id="fc2">Return Policy</a></li>
+      <li><a onclick="openChat()" id="fc3">FAQ</a></li>
+      <li><a onclick="openChat()" id="fc4">Contact Us</a></li>
+    </ul></div>
+    <div class="fcol"><h5 id="fct">Contact</h5><ul>
+      <li><a href="mailto:dropstore.hello@gmail.com">&#128231; dropstore.hello@gmail.com</a></li>
+      <li><a onclick="openChat()" id="fchat">&#128172; Live Chat</a></li>
+      <li><a onclick="openChat()" id="fsup">&#127911; Support</a></li>
+    </ul></div>
+  </div>
+  <div class="fbot"><span id="fcpy">&#169; 2026 DropStore &#8212; All rights reserved</span><span>&#128179; &#128274; &#128230; &#9992;&#65039;</span></div>
+</footer>
+<div class="ov" id="OV" onclick="closeAll()"></div>
+<div class="drawer" id="DR">
+  <div class="drhdr"><span class="drtitle">&#128722; <span id="myCart">Shopping Cart</span></span><button class="xbtn" onclick="closeCart()">&#10005;</button></div>
+  <div class="drbody" id="DB"><div class="cempty"><span class="cei">&#128722;</span><p id="emp">Your cart is empty</p><span id="emps">Add products to start shopping</span></div></div>
+  <div class="drfoot">
+    <div class="cpnrow"><input class="cpninp" id="CPN" placeholder="Discount code..."><button class="cpnbtn" onclick="applyCpn()" id="applyBtn">Apply</button></div>
+    <div class="tots">
+      <div class="trow"><span id="subLbl">Subtotal</span><span id="TS">$0.00</span></div>
+      <div class="trow"><span id="shipLbl">Shipping</span><span id="TSH">&#8212;</span></div>
+      <div class="trow fin"><span id="totLbl">Total</span><span id="TT">$0.00</span></div>
+    </div>
+    <button class="paybtn" onclick="goCk()">&#128179; <span id="checkoutLbl">Secure Checkout</span></button>
+    <p class="sectxt">&#128274; <span id="secLbl">100% secure &amp; encrypted</span></p>
+  </div>
+</div>
+<div class="pgov" id="PDOV" onclick="if(event.target===this)closePd()">
+  <div class="pdmodal">
+    <div class="drhdr"><span class="drtitle" id="PDC">Product Details</span><button class="xbtn" onclick="closePd()">&#10005;</button></div>
+    <div class="pdgrid">
+      <div class="pd-left"><div class="pd-main" id="PDMAIN"></div><div class="pd-thumbs" id="PDTHUMBS"></div></div>
+      <div class="pd-body">
+        <div class="pd-bdgs" id="PDBDGS"></div>
+        <h2 class="pd-name" id="PDNM"></h2>
+        <div class="pd-meta" id="PDMT"></div>
+        <div class="pd-prow" id="PDPR"></div>
+        <div class="pd-desc" id="PDDSC"></div>
+        <ul class="pd-bullets" id="PDBUL"></ul>
+        <h4 style="font-size:13px;font-weight:700;color:var(--tx2);margin-top:4px" id="specTitle">Specifications</h4>
+        <div class="pd-specs-grid" id="PDSP"></div>
+        <div class="pd-stk" id="PDSTK"></div>
+        <div class="pd-acts">
+          <button class="paybtn" onclick="pdAdd();closePd()" style="flex:1">&#128722; <span id="addCartLbl">Add to Cart</span></button>
+          <button class="btnfav" id="PDWSH" onclick="pdWish()" style="width:50px;height:50px;font-size:20px;border-radius:var(--rs)">&#129293;</button>
+        </div>
+        <div class="pd-ship">
+          <div class="pd-si">&#128666; <span id="pdS1">Fast Shipping &#8212; 5-7 business days</span></div>
+          <div class="pd-si">&#8617;&#65039; <span id="pdS2">Free Returns &#8212; Within 30 days</span></div>
+          <div class="pd-si">&#128274; <span id="pdS3">100% secure &amp; encrypted</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pgov" id="CKOV" onclick="if(event.target===this)closeCk()">
+  <div class="ckmodal">
+    <div class="cmhdr"><span class="cmtitle">&#128179; <span id="ckTitle">Checkout</span></span><button class="xbtn" onclick="closeCk()">&#10005;</button></div>
+    <div class="cmbody">
+      <div class="osum" id="OSUM"></div>
+      <div class="fgrp"><label class="flbl" id="flName">Full Name</label><input class="finp" id="CKN" placeholder="Enter your full name"></div>
+      <div class="fgrp"><label class="flbl" id="flEmail">Email Address</label><input class="finp" id="CKE" type="email" placeholder="example@email.com"></div>
+      <div class="fgrp"><label class="flbl" id="flAddr">Full Address</label><input class="finp" id="CKA" placeholder="City, Street, Building number"></div>
+      <div class="divider"><span id="payWith">Payment Method</span></div>
+      <button class="ppbtn" onclick="doPP()">&#128179; <span id="payBtn">PayPal &#8212; Secure Payment</span></button>
+      <div class="pmethods">&#128179; &#127974; &#128241;</div>
+      <p style="text-align:center;font-size:11px;color:var(--tx3);margin-top:10px" id="payNote">You will be redirected to complete payment securely</p>
+    </div>
+  </div>
+</div>
+<button class="chatbtn" onclick="toggleChat()">&#128172;</button>
+<div class="chatw" id="CHW">
+  <div class="chathdr">
+    <div class="chatav">&#129302;</div>
+    <div><div class="chatname" id="botName">DropStore Assistant</div><div class="chatstatus" id="botOnline">Online &#8226; Instant replies</div></div>
+    <button class="xbtn" onclick="toggleChat()" style="margin-left:auto;border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff">&#10005;</button>
+  </div>
+  <div class="chatmsg" id="CHMS"></div>
+  <div class="chatqas" id="CHQA"></div>
+  <div class="chatinprow">
+    <input class="chatinp" id="CHI" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="chatsend" onclick="sendMsg()">&#10148;</button>
+  </div>
+</div>
+<div class="toasts" id="TW"></div>
+<script>
+var P=[{"id": "1", "name": "Smart Eye Massager with Heat", "name_ar": "مساج العيون الذكي بالحرارة", "cat": "health", "price": 49.99, "was": 89.99, "rating": 4.8, "reviews": 1284, "sold": 3421, "stock": 87, "flash": true, "feat": true, "desc": "Relieves eye strain, headaches and dark circles with 42°C heat therapy and air pressure massage. Bluetooth enabled for music. Perfect for office workers.", "desc_ar": "يخفف إجهاد العيون والصداع بتقنية الحرارة 42°C وضغط الهواء. يتصل بالبلوتوث لتشغيل الموسيقى.", "bullets": ["42°C Heat Therapy — reduces puffiness", "3 levels of air pressure massage", "Bluetooth 5.0 music connection", "1200mAh battery — 60 min use", "Foldable travel-friendly design"], "specs": [["Weight", "250g"], ["Battery", "1200mAh"], ["Charge Time", "90 min"], ["Use Time", "60 min"], ["Connectivity", "Bluetooth 5.0"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/f075d594cf9540a7bd20c02e17a9a37fb11e13d7.jpg", "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=85", "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=85"]}, {"id": "2", "name": "Medical Posture Corrector Belt", "name_ar": "حزام تقويم الظهر الطبي", "cat": "health", "price": 29.99, "was": 54.99, "rating": 4.7, "reviews": 2341, "sold": 5670, "stock": 203, "flash": false, "feat": false, "desc": "Clinically approved back brace that gently aligns your spine and pulls shoulders back. Breathable fabric — wear under clothes all day.", "desc_ar": "حزام طبي معتمد يصحح انحناء الظهر. قماش قابل للتنفس يمكن ارتداؤه طوال اليوم.", "bullets": ["Doctor recommended for office workers", "Breathable adjustable straps", "Fits under clothing — discreet", "Available in S/M/L/XL", "Visible improvement in 2-4 weeks"], "specs": [["Material", "Elastic breathable"], ["Sizes", "S/M/L/XL"], ["Weight", "180g"], ["Use", "All day"], ["Waterproof", "Yes"], ["Warranty", "6 Months"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/fe2fab94fdd00a6bef8f67519bf25bd4968e91db.jpg", "https://images.unsplash.com/photo-1596704017254-9b121068fb31?w=600&q=85", "https://images.unsplash.com/photo-1544367667-066e93d8b309?w=600&q=85"]}, {"id": "3", "name": "Smart Body Scale — 13 Health Metrics", "name_ar": "ميزان الجسم الذكي 13 قياس", "cat": "health", "price": 26.99, "was": 49.99, "rating": 4.7, "reviews": 1876, "sold": 5400, "stock": 198, "flash": false, "feat": false, "desc": "Measures 13 body metrics in seconds: weight, body fat, muscle mass, BMI, hydration, bone density and more. Auto-syncs to your phone app.", "desc_ar": "يقيس 13 مؤشراً صحياً دفعة واحدة: الوزن والدهون والعضلات و BMI وأكثر. يتزامن تلقائياً مع التطبيق.", "bullets": ["13 body metrics in one step", "Bluetooth sync to iOS & Android app", "Supports 8 family profiles", "0.1kg precision sensor", "Tempered glass — 180kg max"], "specs": [["Precision", "0.1 kg"], ["Max Load", "180 kg"], ["Connectivity", "Bluetooth 4.0"], ["Battery", "3×AAA"], ["Display", "LED"], ["App", "iOS & Android"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/cdn11.bigcommerce.com/67d47a7d084d082542cde92f51f40c847e5e8a5d.jpg", "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=600&q=85", "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85"]}, {"id": "4", "name": "Neck & Shoulder Massager Pro", "name_ar": "جهاز مساج الرقبة والكتفين", "cat": "health", "price": 34.99, "was": 64.99, "rating": 4.8, "reviews": 987, "sold": 2345, "stock": 156, "flash": false, "feat": false, "desc": "8 bi-directional rotating heads with 38-45°C heat therapy. Melts away neck tension in 15 minutes. USB-C rechargeable.", "desc_ar": "8 رؤوس دوّارة مع حرارة 38-45°C. يذيب توتر الرقبة في 15 دقيقة. يُشحن عبر USB-C.", "bullets": ["8 rotating heads — bi-directional", "Heat therapy 38-45°C adjustable", "3 speed levels + 15-min timer", "USB-C rechargeable — portable", "Fits all neck sizes"], "specs": [["Heads", "8 rotating"], ["Heat", "38-45°C"], ["Speeds", "3 levels"], ["Power", "USB-C"], ["Weight", "320g"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/cdn11.bigcommerce.com/2596bb94da1a43ea3d88a7db7eca25302c923e2b.jpg", "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=85", "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=85"]}, {"id": "5", "name": "LED Light Therapy Face Mask — 7 Colors", "name_ar": "قناع العلاج بالضوء LED — 7 ألوان", "cat": "beauty", "price": 32.99, "was": 79.99, "rating": 4.5, "reviews": 678, "sold": 1200, "stock": 89, "flash": false, "feat": false, "desc": "Clinical-grade 7-color LED mask for acne, wrinkles and uneven skin tone. FDA registered. 15 minutes a day for visible results.", "desc_ar": "قناع LED طبي بـ7 ألوان لعلاج حب الشباب والتجاعيد وتوحيد لون البشرة. معتمد FDA.", "bullets": ["Red light — anti-aging & collagen", "Blue light — kills acne bacteria", "7 therapeutic color modes", "FDA-registered medical silicone", "Wireless remote included"], "specs": [["Colors", "7 wavelengths"], ["Session", "15-20 min"], ["Power", "USB"], ["Material", "Medical silicone"], ["Certification", "FDA"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/dec5b8cd49f54386e0f62b3a9af89c26da443083.jpg", "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=85", "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=85"]}, {"id": "6", "name": "Smartwatch Pro Max — 7-Day Battery", "name_ar": "ساعة ذكية Pro Max — بطارية 7 أيام", "cat": "tech", "price": 39.99, "was": 79.99, "rating": 4.6, "reviews": 892, "sold": 2100, "stock": 134, "flash": false, "feat": true, "desc": "Monitors heart rate, SpO2, sleep quality and stress 24/7. IP68 waterproof. 1.7-inch AMOLED display. 100+ sports modes.", "desc_ar": "تراقب معدل ضربات القلب والأكسجين وجودة النوم. مقاومة ماء IP68. شاشة AMOLED 1.7 بوصة.", "bullets": ["Heart rate + SpO2 monitoring 24/7", "IP68 waterproof — swim safe", "7-day battery on single charge", "1.7-inch AMOLED display", "100+ sports modes"], "specs": [["Display", "1.7\" AMOLED"], ["Battery", "7 days"], ["Water Resistance", "IP68"], ["Connectivity", "Bluetooth 5.2"], ["Sports Modes", "100+"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/www.more-pro.com/f4601b24c888f7eac5c09b9d4a4b24d71b72ff0e.jpg", "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600&q=85", "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&q=85"]}, {"id": "7", "name": "Wireless ANC Headphones — 32hr Battery", "name_ar": "سماعات لاسلكية ANC — بطارية 32 ساعة", "cat": "tech", "price": 44.99, "was": 89.99, "rating": 4.7, "reviews": 1567, "sold": 4230, "stock": 78, "flash": true, "feat": false, "desc": "Active Noise Cancellation blocks 35dB. Hi-Fi 40mm drivers. 32-hour battery with 10-min quick charge = 3 hours.", "desc_ar": "إلغاء ضجيج نشط يحجب 35dB. مكبرات Hi-Fi 40mm. بطارية 32 ساعة مع شحن سريع.", "bullets": ["ANC — blocks 35dB ambient noise", "40mm Hi-Fi drivers — studio sound", "32-hour battery + quick charge", "Foldable with carrying case", "Crystal clear calls built-in mic"], "specs": [["Drivers", "40mm Hi-Fi"], ["ANC", "-35dB"], ["Battery", "32 hours"], ["Charging", "USB-C fast"], ["Weight", "250g"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/morpheus360.com/b9e3e73be3d07a242505b3b821143e07a1947ef1.jpg", "https://images.unsplash.com/photo-1546435770-a3e736b68888?w=600&q=85", "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=85"]}, {"id": "8", "name": "Power Bank 20000mAh — 22.5W Fast Charge", "name_ar": "باور بنك 20000mAh — شحن سريع 22.5W", "cat": "tech", "price": 31.99, "was": 59.99, "rating": 4.6, "reviews": 3456, "sold": 9800, "stock": 432, "flash": false, "feat": false, "desc": "Charges your phone 5 times. 22.5W PD fast charging: 0 to 60% in 30 minutes. 3 ports. Digital LED display.", "desc_ar": "يشحن هاتفك 5 مرات. شحن سريع 22.5W: من 0 إلى 60% في 30 دقيقة. 3 منافذ مع شاشة LED.", "bullets": ["20000mAh — charges phone 5 times", "22.5W PD fast charge output", "3 ports: 2×USB-A + USB-C", "Digital LED battery % display", "Airline approved size"], "specs": [["Capacity", "20000mAh"], ["Fast Charge", "22.5W PD"], ["Ports", "2×USB-A + USB-C"], ["Weight", "340g"], ["Display", "LED digital"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/myhypergear.com/a54a2789ab83aaa74e3450a51cc7443a2f3b5b3a.jpg", "https://images.unsplash.com/photo-1619983081563-430f63602796?w=600&q=85", "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&q=85"]}, {"id": "9", "name": "Smart Air Humidifier 4L — App Control", "name_ar": "مرطب الهواء الذكي 4L — تحكم ذكي", "cat": "tech", "price": 38.99, "was": 69.99, "rating": 4.6, "reviews": 1234, "sold": 3200, "stock": 203, "flash": false, "feat": false, "desc": "4-liter tank runs 40 hours. Control from anywhere via app. 7-color LED mood lighting. Ultra-quiet under 36dB.", "desc_ar": "خزان 4 لتر يعمل 40 ساعة. تحكم عبر التطبيق. إضاءة LED 7 ألوان. صامت جداً أقل من 36dB.", "bullets": ["4L tank — 40 hours run time", "WiFi app control — set schedules", "7-color LED ambient lighting", "Ultra-quiet < 36dB", "Auto-shutoff when empty"], "specs": [["Capacity", "4 Liters"], ["Run Time", "40 hours"], ["Connectivity", "WiFi + App"], ["Noise", "< 36dB"], ["LED", "7 colors"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/978731da71e3407b3403565c2b708d5ad48d653d.jpg", "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&q=85", "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=85"]}, {"id": "10", "name": "Kids GPS Smartwatch — SOS Button", "name_ar": "ساعة أطفال GPS — زر SOS للطوارئ", "cat": "tech", "price": 29.99, "was": 54.99, "rating": 4.5, "reviews": 765, "sold": 2100, "stock": 145, "flash": false, "feat": false, "desc": "Real-time GPS tracking. One-press SOS alerts 3 family members instantly. Two-way calling. IP67 waterproof.", "desc_ar": "تتبع GPS في الوقت الفعلي. زر SOS يُنبه 3 أفراد فوراً. مكالمات ثنائية. مقاومة ماء IP67.", "bullets": ["Real-time GPS accurate to 10m", "SOS button — 3 emergency contacts", "Two-way calling anytime", "IP67 waterproof outdoor safe", "Geo-fence zone alerts"], "specs": [["GPS", "Real-time ±10m"], ["SOS", "3 contacts"], ["Water", "IP67"], ["Battery", "24 hours"], ["SIM", "Built-in nano"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/image.made-in-china.com/d76d61b24f33fd086f914808eaeac3219ab15639.webp", "https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=85", "https://images.unsplash.com/photo-1581009137042-c552e485697a?w=600&q=85"]}, {"id": "11", "name": "Collagen Brightening Serum — 95% Pure", "name_ar": "سيروم الكولاجين 95% — تفتيح وشد", "cat": "beauty", "price": 24.99, "was": 44.99, "rating": 4.9, "reviews": 3102, "sold": 8900, "stock": 445, "flash": false, "feat": true, "desc": "95% pure marine collagen visibly firms, brightens and reduces fine lines in 4 weeks. Lightweight, fast-absorbing. All skin types.", "desc_ar": "كولاجين بحري 95% يشد ويفتح البشرة ويقلل الخطوط الدقيقة خلال 4 أسابيع. لجميع أنواع البشرة.", "bullets": ["95% pure marine collagen", "Reduces fine lines in 4 weeks", "Absorbs in under 30 seconds", "Paraben-free & alcohol-free", "Morning and night use"], "specs": [["Concentration", "95% collagen"], ["Size", "30ml"], ["Use", "AM & PM"], ["Skin Type", "All types"], ["Free From", "Parabens"], ["Guarantee", "Free replacement"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/heavenskincare.com/c2af5a54524b7eae0f07be949377090282b5aca4.png", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=85", "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=85"]}, {"id": "12", "name": "Retinol Anti-Wrinkle Night Cream", "name_ar": "كريم الريتينول المضاد للتجاعيد الليلي", "cat": "beauty", "price": 19.99, "was": 39.99, "rating": 4.8, "reviews": 4231, "sold": 11000, "stock": 678, "flash": false, "feat": false, "desc": "0.5% retinol night cream rebuilds collagen and fades wrinkles while you sleep. Enriched with Vitamin E and shea butter.", "desc_ar": "كريم ليلي بالريتينول 0.5% يجدد الكولاجين ويخفف التجاعيد أثناء النوم. غني بفيتامين E وزبدة الشيا.", "bullets": ["0.5% retinol — clinical strength", "Rebuilds collagen overnight", "Vitamin E + shea butter hydration", "Fades wrinkles in 6 weeks", "For normal, dry & combination skin"], "specs": [["Retinol", "0.5%"], ["Size", "50ml"], ["Use", "Night only"], ["Key Ingredients", "Retinol + Vit E"], ["Alcohol-free", "Yes"], ["Guarantee", "Free replacement"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/en.revitaltrax.com/d4b9872fd7982cfa5c6da0bafba5659cb567fc6d.png", "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=85", "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=85"]}, {"id": "13", "name": "Ionic Hair Dryer Professional 2200W", "name_ar": "مجفف شعر يوني احترافي 2200W", "cat": "beauty", "price": 42.99, "was": 84.99, "rating": 4.8, "reviews": 1234, "sold": 3400, "stock": 89, "flash": true, "feat": false, "desc": "Negative ion technology reduces frizz by 70%. 2200W motor dries hair 2x faster. 3 speeds, 2 heat settings + cool shot.", "desc_ar": "تقنية الأيونات السالبة تقلل التجعيد 70%. محرك 2200W يجفف الشعر ضعف السرعة العادية.", "bullets": ["2200W motor — 2x faster drying", "Negative ions — 70% less frizz", "3 speeds + 2 heat + cool shot", "3-meter cable + 2 nozzles", "Salon quality at home"], "specs": [["Power", "2200W"], ["Technology", "Negative ion"], ["Speeds", "3 levels"], ["Heat", "2 + cool shot"], ["Cable", "3 meters"], ["Warranty", "2 Years"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/www.ariabeauty.com/b091cf586f6b2da40267926f47a718605ba14e24.jpg", "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=85", "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=85"]}, {"id": "14", "name": "Electric Facial Cleansing Brush — 5 Speeds", "name_ar": "فرشاة تنظيف الوجه الكهربائية — 5 سرعات", "cat": "beauty", "price": 22.99, "was": 44.99, "rating": 4.6, "reviews": 1876, "sold": 4500, "stock": 234, "flash": false, "feat": false, "desc": "Removes 6x more dirt than hands. 3 interchangeable heads. 5 speeds. IPX7 waterproof — use in the shower.", "desc_ar": "تزيل 6 أضعاف الأوساخ مقارنة باليدين. 3 رؤوس قابلة للتبديل. 5 سرعات. مقاومة ماء IPX7.", "bullets": ["6x deeper cleanse than hands", "3 interchangeable heads", "5 speed levels — gentle to deep", "IPX7 waterproof — shower safe", "USB-C charge — 2 hour full"], "specs": [["Speeds", "5 levels"], ["Heads", "3 interchangeable"], ["Water", "IPX7"], ["Charging", "USB-C"], ["Charge Time", "2 hours"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/michaeltoddbeauty.com/572ed8a8a71558b5533fcadfcc949dbe09fe71dd.jpg", "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=600&q=85", "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=85"]}, {"id": "15", "name": "Portable USB Blender — 380ml Smoothie", "name_ar": "خلاط USB محمول — سموثي 380ml", "cat": "home", "price": 22.99, "was": 39.99, "rating": 4.6, "reviews": 2890, "sold": 7650, "stock": 312, "flash": false, "feat": true, "desc": "Makes a fresh smoothie in 20 seconds. 6 stainless steel blades crush ice. USB-C charging. IPX6 waterproof.", "desc_ar": "يصنع سموثي طازج في 20 ثانية. 6 شفرات ستانلس تطحن الجليد. شحن USB-C. مقاوم للماء IPX6.", "bullets": ["Full smoothie in 20 seconds", "6-blade stainless steel system", "380ml BPA-free Tritan bottle", "IPX6 waterproof — rinse easily", "USB-C charge = 15+ blends"], "specs": [["Capacity", "380ml"], ["Blades", "6 stainless steel"], ["Charging", "USB-C"], ["Charge Time", "2 hours"], ["Water", "IPX6"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/img.kwcdn.com/605123cf574e7f276b1bd32777879026a10d7602.jpg", "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=600&q=85", "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=600&q=85"]}, {"id": "16", "name": "Kitchen Knives Set — 6-Piece Damascus Steel", "name_ar": "مجموعة سكاكين مطبخ — 6 قطع فولاذ دمشقي", "cat": "home", "price": 35.99, "was": 64.99, "rating": 4.9, "reviews": 2100, "sold": 6800, "stock": 223, "flash": false, "feat": false, "desc": "67-layer Damascus German steel. Razor-sharp and perfectly balanced. Walnut handles. Includes wooden block. Lifetime warranty.", "desc_ar": "فولاذ ألماني دمشقي 67 طبقة. حادة ومتوازنة. مقابض جوز. مع حامل خشبي. ضمان مدى الحياة.", "bullets": ["67-layer Damascus steel stays sharp", "6 knives + premium wooden block", "Walnut wood ergonomic handles", "60 HRC professional grade", "Lifetime warranty on defects"], "specs": [["Steel", "67-layer Damascus"], ["Set", "6 knives + block"], ["Hardness", "60 HRC"], ["Handle", "Walnut wood"], ["Certification", "CE"], ["Warranty", "Lifetime"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/i.etsystatic.com/3b0f3b38f2c430be26eb28950ec8f533573cad63.jpg", "https://images.unsplash.com/photo-1581447109200-bf2769116351?w=600&q=85", "https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?w=600&q=85"]}, {"id": "17", "name": "Wardrobe Organizer — 6-Tier Adjustable", "name_ar": "منظّم الدولاب — 6 طوابق قابلة للضبط", "cat": "home", "price": 18.99, "was": 34.99, "rating": 4.4, "reviews": 3456, "sold": 12300, "stock": 534, "flash": false, "feat": false, "desc": "6 adjustable tiers save 40% more wardrobe space. BPA-free plastic. Holds 5kg per shelf. No tools needed, assembles in 3 minutes.", "desc_ar": "6 طوابق قابلة للتعديل توفر 40% مساحة إضافية. بلاستيك BPA-Free. يحمل 5 كجم لكل طابق.", "bullets": ["6 adjustable shelves — customize", "5kg load per shelf — sturdy", "BPA-free plastic — safe", "No tools — assembles in 3 min", "White or grey color options"], "specs": [["Tiers", "6 adjustable"], ["Load", "5kg per shelf"], ["Material", "BPA-free plastic"], ["Assembly", "No tools"], ["Dimensions", "40x35x120cm"], ["Colors", "White/Grey"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/tribesigns.com/09abf6a44fb7066c91e1f95616a393bbd7afe152.jpg", "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&q=85", "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=85"]}, {"id": "18", "name": "Non-Slip Yoga Mat — 6mm Natural Rubber", "name_ar": "حصيرة يوغا مضادة للانزلاق — 6mm مطاط طبيعي", "cat": "sports", "price": 21.99, "was": 39.99, "rating": 4.7, "reviews": 2890, "sold": 7600, "stock": 567, "flash": false, "feat": false, "desc": "Eco-friendly natural rubber. Textured non-slip surface. 6mm joint protection. 183x61cm. Includes carry strap.", "desc_ar": "مطاط طبيعي صديق للبيئة. سطح مضاد للانزلاق. سماكة 6mm لحماية المفاصل. 183x61cm.", "bullets": ["Natural rubber — eco-friendly", "Textured non-slip on any floor", "6mm thick joint protection", "183x61cm — fits all styles", "Carry strap included"], "specs": [["Thickness", "6mm"], ["Material", "Natural rubber"], ["Dimensions", "183 x 61cm"], ["Weight", "900g"], ["Eco-Friendly", "Yes"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/cdc2b2ec34f7c46f4026b4669af9234754f2f16b.jpg", "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=85", "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=85"]}, {"id": "19", "name": "Massage Gun Pro — 30 Speeds, 6 Heads", "name_ar": "مدفع التدليك Pro — 30 سرعة، 6 رؤوس", "cat": "sports", "price": 47.99, "was": 89.99, "rating": 4.7, "reviews": 987, "sold": 3200, "stock": 145, "flash": false, "feat": false, "desc": "30 speed levels and 6 heads target every muscle group. Ultra-quiet under 45dB. 6-hour battery. Professional grade.", "desc_ar": "30 مستوى سرعة و6 رؤوس تستهدف كل مجموعة عضلية. هادئ جداً أقل من 45dB. بطارية 6 ساعات.", "bullets": ["30 speed levels — gentle to deep tissue", "6 interchangeable massage heads", "Ultra-quiet — under 45dB", "6-hour battery per charge", "Travel pouch included"], "specs": [["Speeds", "30 levels"], ["Heads", "6 interchangeable"], ["Noise", "< 45dB"], ["Battery", "3200mAh — 6hr"], ["Use Time", "6 hours"], ["Warranty", "2 Years"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/i5.walmartimages.com/49ff4991c843e3c29719c56ec3da7eeba67bc4a3.jpeg", "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&q=85", "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=85"]}, {"id": "20", "name": "Adjustable Ankle Weights — 0.5 to 5kg", "name_ar": "أوزان كاحل قابلة للضبط — 0.5 إلى 5 كجم", "cat": "sports", "price": 27.99, "was": 49.99, "rating": 4.6, "reviews": 445, "sold": 890, "stock": 67, "flash": false, "feat": false, "desc": "Adjustable from 0.5kg to 5kg per foot by adding/removing sand pouches. Soft neoprene. Velcro closure. Sold as pair.", "desc_ar": "قابلة للضبط من 0.5 إلى 5 كجم بإضافة أو إزالة أكياس الرمل. نيوبرين ناعم. إغلاق فيلكرو.", "bullets": ["Adjustable 0.5 to 5kg per foot", "Add/remove sand pouches easily", "Soft neoprene — comfortable", "Velcro strap — secure fit", "Sold as a pair (2 pieces)"], "specs": [["Weight", "0.5-5kg per foot"], ["Adjustment", "Add/remove pouches"], ["Material", "Neoprene + sand"], ["Closure", "Velcro"], ["Sold As", "Pair (2)"], ["Warranty", "1 Year"]], "imgs": ["https://kimi-web-img.moonshot.cn/img/livefit.com/cd8e4446920205b072451c5d9cee37b7216d750a.jpg", "https://images.unsplash.com/photo-1577221084712-45b0445d2b00?w=600&q=85", "https://images.unsplash.com/photo-1601925228216-d4ee4e6a1fc7?w=600&q=85"]}];
+var AR={"a1": "&#127873; شحن مجاني للطلبات فوق $50", "a2": "كود <strong>SAVE20</strong> خصم 20%", "a3": "&#11088; +5000 عميل سعيد", "ht0": "&#9889; الأكثر مبيعاً 2026", "ht1": "&#10024; جمال وعناية", "ht2": "&#128241; تقنية 2026", "hp0": "أفضل المنتجات المختارة بعناية بأسعار لا تُقاوم وشحن سريع.", "hp1": "منتجات عناية بالبشرة من أفضل المصادر.", "hp2": "ساعات ذكية وسماعات وإكسسوارات تقنية.", "shopNow": "تسوق الآن", "deals": "العروض", "shopB": "تسوق الجمال", "shopT": "تسوق التقنية", "st1": "منتج مختار", "st2": "عميل سعيد", "st3": "تقييم", "hfl": "تقييم العملاء", "fl": "&#9889; عرض ينتهي خلال:", "fr": "خصم حتى 50% &#128293;", "byCat": "تسوق حسب الفئة", "allP": "جميع المنتجات", "cAll": "الكل", "cH": "صحة", "cT": "تقنية", "cB": "جمال", "cHm": "بيت", "cSp": "رياضة", "pt0": "الأكثر مبيعاً", "ptit0": "مساج العيون الذكي", "psb0": "خصم 44% &#8212; عرض محدود", "pb0": "اطلب الآن", "pt1": "4.9 &#11088; أكثر من 3000 تقييم", "ptit1": "سيروم الكولاجين", "psb1": "نتائج مرئية خلال 4 أسابيع", "pb1": "اكتشف الآن", "tr1": "شحن سريع", "tr1s": "5-7 أيام عمل", "tr2": "دفع آمن 100%", "tr2s": "مشفر وموثوق", "tr3": "إرجاع مجاني", "tr3s": "خلال 30 يوم", "tr4": "دعم على مدار الساعة", "fsh": "تسوق", "ff1": "صحة ولياقة", "ff2": "تقنية وأجهزة", "ff3": "جمال وعناية", "ff4": "بيت ومطبخ", "ff5": "رياضة ولياقة", "fcs": "خدمة العملاء", "fc1": "تتبع طلبك", "fc2": "سياسة الإرجاع", "fc3": "الأسئلة الشائعة", "fc4": "تواصل معنا", "fct": "التواصل", "fchat": "&#128172; الدردشة", "fsup": "&#127911; الدعم", "fdesc": "متجرك الموثوق للمنتجات المختارة. جودة عالية وأسعار منافسة وتوصيل سريع.", "fcpy": "&#169; 2026 DropStore &#8212; جميع الحقوق محفوظة", "cartLbl": "السلة", "myCart": "سلة التسوق", "emp": "سلتك فارغة", "emps": "أضف منتجات لتبدأ التسوق", "subLbl": "المجموع الفرعي", "shipLbl": "الشحن", "totLbl": "الإجمالي", "applyBtn": "تطبيق", "checkoutLbl": "إتمام الشراء", "secLbl": "دفع آمن ومشفر", "ckTitle": "إتمام الشراء", "flName": "الاسم الكامل", "flEmail": "البريد الإلكتروني", "flAddr": "العنوان الكامل", "payWith": "طريقة الدفع", "payBtn": "PayPal &#8212; دفع آمن", "payNote": "سيتم توجيهك لإتمام الدفع", "botName": "مساعد DropStore", "botOnline": "متاح &#8226; يرد فوراً", "addCartLbl": "أضف للسلة", "specTitle": "المواصفات", "pdS1": "شحن سريع &#8212; 5-7 أيام عمل", "pdS2": "إرجاع مجاني &#8212; خلال 30 يوم", "pdS3": "دفع آمن ومشفر", "srchPh": "ابحث عن منتج...", "cpnPh": "كود الخصم...", "ckNPh": "أدخل اسمك الكامل", "ckAPh": "المدينة، الشارع، رقم البناء", "chatPh": "اكتب سؤالك...", "sold": "مبيع", "items": "منتج", "noRes": "لا توجد نتائج", "freeShip": "شحن مجاني &#127873;", "addedMsg": "أضيف للسلة", "wishAdd": "أضيف للمفضلة", "wishRem": "حذف من المفضلة", "cpnOk": "تم تطبيق الخصم", "cpnErr": "كود غير صحيح", "cartEmp": "سلتك فارغة أولاً", "ckFill": "أكمل بياناتك أولاً", "ckSend": "جاري التوجيه...", "ckOk": "تم استلام طلبك!", "instock": "متوفر &#8212; جاهز للشحن", "lowstock": "باقي فقط!", "lbtn": "AR &#127760;", "cnm": {"health": "صحة", "tech": "تقنية", "beauty": "جمال", "home": "بيت", "sports": "رياضة"}, "qdis": "ما كودات الخصم؟", "qship": "كم يستغرق الشحن؟", "qret": "ما سياسة الإرجاع؟", "qpay": "ما طرق الدفع؟", "qcon": "كيف أتواصل معكم؟", "adis": "SAVE20 (20%), WELCOME10 (10%), DROP15 (15%)", "aship": "5-7 أيام. شحن مجاني فوق $50.", "aret": "إرجاع مجاني خلال 30 يوماً.", "apay": "PayPal وجميع البطاقات.", "acon": "dropstore.hello@gmail.com", "afall": "dropstore.hello@gmail.com"};
+
+var EM={health:"\uD83D\uDC9A",tech:"\uD83D\uDCF1",beauty:"\u2728",home:"\uD83C\uDFE0",sports:"\uD83C\uDFCB\uFE0F",def:"\uD83D\uDCE6"};
+var lang="en",all=P.slice(),filtered=P.slice(),cart=[],wish=new Set(),disc=0,slide=0,curP=null,chatOn=false;
+try{cart=JSON.parse(localStorage.getItem("dscart")||"[]");}catch(e){cart=[];}
+try{wish=new Set(JSON.parse(localStorage.getItem("dswish")||"[]"));}catch(e){wish=new Set();}
+
+document.addEventListener("DOMContentLoaded",function(){renderProds(filtered);updateCart();initSlider();initTimer();initChat();});
+
+function s(id,v){var e=document.getElementById(id);if(e)e.innerHTML=v;}
+function t(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+function ph(id,v){var e=document.getElementById(id);if(e)e.placeholder=v;}
+
+function togLang(){
+  lang=lang==="en"?"ar":"en";
+  localStorage.setItem("dslang",lang);
+  var r=document.getElementById("R");
+  r.setAttribute("lang",lang);r.setAttribute("dir",lang==="ar"?"rtl":"ltr");
+  if(lang==="ar"){
+    s("LB",AR.lbtn);s("ann1",AR.a1);s("ann2",AR.a2);t("ann3",AR.a3);
+    t("ht0",AR.ht0);t("ht1",AR.ht1);t("ht2",AR.ht2);
+    t("hp0",AR.hp0);t("hp1",AR.hp1);t("hp2",AR.hp2);
+    t("shopNow",AR.shopNow);t("deals",AR.deals);t("shopB",AR.shopB);t("shopT",AR.shopT);
+    t("st1",AR.st1);t("st2",AR.st2);t("st3",AR.st3);t("hfl",AR.hfl);
+    s("fl",AR.fl);t("fr",AR.fr);t("byCat",AR.byCat);t("allP",AR.allP);
+    t("cAll",AR.cAll);t("cH",AR.cH);t("cT",AR.cT);t("cB",AR.cB);t("cHm",AR.cHm);t("cSp",AR.cSp);
+    t("pt0",AR.pt0);t("ptit0",AR.ptit0);s("psb0",AR.psb0);t("pb0",AR.pb0);
+    s("pt1",AR.pt1);t("ptit1",AR.ptit1);t("psb1",AR.psb1);t("pb1",AR.pb1);
+    t("tr1",AR.tr1);t("tr1s",AR.tr1s);t("tr2",AR.tr2);t("tr2s",AR.tr2s);t("tr3",AR.tr3);t("tr3s",AR.tr3s);t("tr4",AR.tr4);
+    t("fsh",AR.fsh);t("ff1",AR.ff1);t("ff2",AR.ff2);t("ff3",AR.ff3);t("ff4",AR.ff4);t("ff5",AR.ff5);
+    t("fcs",AR.fcs);t("fc1",AR.fc1);t("fc2",AR.fc2);t("fc3",AR.fc3);t("fc4",AR.fc4);
+    t("fct",AR.fct);s("fchat",AR.fchat);s("fsup",AR.fsup);t("fdesc",AR.fdesc);s("fcpy",AR.fcpy);
+    t("cartLbl",AR.cartLbl);t("myCart",AR.myCart);t("emp",AR.emp);t("emps",AR.emps);
+    t("subLbl",AR.subLbl);t("shipLbl",AR.shipLbl);t("totLbl",AR.totLbl);t("applyBtn",AR.applyBtn);t("checkoutLbl",AR.checkoutLbl);t("secLbl",AR.secLbl);
+    t("ckTitle",AR.ckTitle);t("flName",AR.flName);t("flEmail",AR.flEmail);t("flAddr",AR.flAddr);
+    t("payWith",AR.payWith);s("payBtn",AR.payBtn);t("payNote",AR.payNote);
+    t("botName",AR.botName);t("botOnline",AR.botOnline);
+    t("addCartLbl",AR.addCartLbl);t("specTitle",AR.specTitle);
+    s("pdS1",AR.pdS1);s("pdS2",AR.pdS2);s("pdS3",AR.pdS3);
+    ph("SI",AR.srchPh);ph("CPN",AR.cpnPh);ph("CKN",AR.ckNPh);ph("CKA",AR.ckAPh);ph("CHI",AR.chatPh);
+  }else{
+    s("LB","AR \u{1F310}");s("ann1","\u{1F381} Free shipping on orders over $50");s("ann2","Use code <strong>SAVE20</strong> for 20% off");t("ann3","\u2B50 5000+ happy customers");
+    t("ht0","\u26A1 Best Sellers 2026");t("ht1","Beauty & Care");t("ht2","Tech 2026");
+    t("hp0","The best hand-picked products at unbeatable prices with fast delivery to your door.");t("hp1","Premium skincare from top global sources at incredible prices.");t("hp2","Smartwatches, headphones, and tech accessories at unbeatable prices.");
+    t("shopNow","Shop Now");t("deals","Deals");t("shopB","Shop Beauty");t("shopT","Shop Tech");
+    t("st1","Products");t("st2","Customers");t("st3","Rating");t("hfl","Customer Rating");
+    t("fl","Offer ends in:");t("fr","Up to 50% off selected products");t("byCat","Shop by Category");t("allP","All Products");
+    t("cAll","All");t("cH","Health");t("cT","Tech");t("cB","Beauty");t("cHm","Home");t("cSp","Sports");
+    t("pt0","Best Seller");t("ptit0","Smart Eye Massager");t("psb0","44% off \u2014 Limited time");t("pb0","Order Now \u2192");
+    t("pt1","4.9 \u2B50 Over 3000 reviews");t("ptit1","Collagen Serum");t("psb1","Visible results in 4 weeks");t("pb1","Discover Now \u2192");
+    t("tr1","Fast Shipping");t("tr1s","5-7 business days");t("tr2","Secure Payment");t("tr2s","Encrypted & trusted");t("tr3","Free Returns");t("tr3s","Within 30 days");t("tr4","24/7 Support");
+    t("fsh","Shop");t("ff1","Health & Fitness");t("ff2","Tech & Devices");t("ff3","Beauty & Care");t("ff4","Home & Kitchen");t("ff5","Sports & Fitness");
+    t("fcs","Customer Service");t("fc1","Track Order");t("fc2","Return Policy");t("fc3","FAQ");t("fc4","Contact Us");
+    t("fct","Contact");t("fchat","\uD83D\uDCAC Live Chat");t("fsup","\uD83C\uDFA7 Support");t("fdesc","Your trusted store for carefully selected products. High quality, competitive prices, fast delivery.");t("fcpy","\u00A9 2026 DropStore \u2014 All rights reserved");
+    t("cartLbl","Cart");t("myCart","Shopping Cart");t("emp","Your cart is empty");t("emps","Add products to start shopping");
+    t("subLbl","Subtotal");t("shipLbl","Shipping");t("totLbl","Total");t("applyBtn","Apply");t("checkoutLbl","Secure Checkout");t("secLbl","100% secure & encrypted");
+    t("ckTitle","Checkout");t("flName","Full Name");t("flEmail","Email Address");t("flAddr","Full Address");
+    t("payWith","Payment Method");t("payBtn","PayPal \u2014 Secure Payment");t("payNote","You will be redirected to complete payment securely");
+    t("botName","DropStore Assistant");t("botOnline","Online \u2022 Instant replies");
+    t("addCartLbl","Add to Cart");t("specTitle","Specifications");
+    t("pdS1","Fast Shipping \u2014 5-7 business days");t("pdS2","Free Returns \u2014 Within 30 days");t("pdS3","100% secure & encrypted");
+    ph("SI","Search for a product...");ph("CPN","Discount code...");ph("CKN","Enter your full name");ph("CKA","City, Street, Building number");ph("CHI","Type your question...");
+  }
+  renderProds(filtered);renderCart();initChat();
+}
+
+function cn(cat){if(lang==="ar"&&AR.cnm&&AR.cnm[cat])return AR.cnm[cat];var m={health:"Health",tech:"Tech",beauty:"Beauty",home:"Home",sports:"Sports"};return m[cat]||cat;}
+function nm(p){return lang==="ar"?p.name_ar:p.name;}
+
+function renderProds(prods){
+  var g=document.getElementById("PG"),c=document.getElementById("PC");
+  g.className="pgrid";
+  if(c)c.textContent=prods.length+" "+(lang==="ar"?AR.items:"items");
+  if(!prods.length){g.innerHTML="<div style='grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--tx3)'><div style='font-size:44px;margin-bottom:10px'>\uD83D\uDD0D</div><p style='font-size:15px;font-weight:700;color:var(--tx2)'>"+(lang==="ar"?AR.noRes:"No results found")+"</p></div>";return;}
+  var html=[];
+  prods.forEach(function(p){
+    var n=nm(p);
+    var d=Math.max(0,Math.round((1-p.price/p.was)*100));
+    var rat=Math.floor(p.rating);
+    var st="\u2605".repeat(rat)+"\u2606".repeat(5-rat);
+    var inW=wish.has(p.id);
+    var cat=cn(p.cat);
+    var img=p.imgs&&p.imgs[0]?p.imgs[0]:"";
+    var em=EM[p.cat]||EM.def;
+    var addL=lang==="ar"?AR.addCartLbl:"Add to Cart";
+    html.push("<div class='pcard' onclick='openPd(\""+p.id+"\")'>");
+    html.push("<div class='pimg'>");
+    if(img){html.push("<img src='"+img+"' alt='"+n.replace(/['"<>]/g,"")+"' loading='lazy' onerror='imgErr(this)'>");html.push("<div class='pfbk' style='display:none'>"+em+"</div>");}
+    else{html.push("<div class='pfbk'>"+em+"</div>");}
+    html.push("<div class='pbdgs'>");
+    if(p.flash)html.push("<span class='pbdg pbdg-s'>\u26A1 Sale</span>");
+    if(p.feat)html.push("<span class='pbdg pbdg-h'>\uD83D\uDD25</span>");
+    if(d>=25&&!p.flash)html.push("<span class='pbdg pbdg-n'>-"+d+"%</span>");
+    html.push("</div>");
+    html.push("<button class='pwish"+(inW?" on":"")+"' onclick='event.stopPropagation();tWish(\""+p.id+"\",this)'>"+(inW?"\u2764\uFE0F":"\uD83E\uDD0D")+"</button>");
+    html.push("<button class='pquick' onclick='event.stopPropagation();addCart(\""+p.id+"\")'>\uD83D\uDED2 "+addL+"</button>");
+    html.push("</div><div class='pbody'>");
+    html.push("<div class='pcat'>"+cat+"</div><div class='pname'>"+n+"</div>");
+    html.push("<div class='pmeta'><span class='pstars'>"+st+"</span><span class='pratev'>"+p.rating.toFixed(1)+"</span><span class='pratec'>("+p.reviews.toLocaleString()+")</span><span class='psold'>"+p.sold.toLocaleString()+" "+(lang==="ar"?AR.sold:"sold")+"</span></div>");
+    html.push("<div class='pprices'><span class='pcur'>$"+p.price.toFixed(2)+"</span><span class='pwas'>$"+p.was.toFixed(2)+"</span>"+(d>0?"<span class='psave'>-"+d+"%</span>":"")+"</div>");
+    html.push("<div class='pfoot'><button class='btnadd' onclick='event.stopPropagation();addCart(\""+p.id+"\")'>\uD83D\uDED2 "+addL+"</button><button class='btnfav' onclick='event.stopPropagation();tWish(\""+p.id+"\",null)'>\uD83E\uDD0D</button></div>");
+    html.push("</div></div>");
+  });
+  g.innerHTML=html.join("");
+}
+
+function imgErr(el){el.style.display="none";var nx=el.nextElementSibling;if(nx)nx.style.display="flex";}
+
+function openPd(id){
+  var p=all.find(function(x){return x.id===id;});if(!p)return;
+  curP=p;
+  var n=nm(p);
+  var d=Math.max(0,Math.round((1-p.price/p.was)*100));
+  var rat=Math.floor(p.rating);
+  var st="\u2605".repeat(rat)+"\u2606".repeat(5-rat);
+  var img0=p.imgs&&p.imgs[0]?p.imgs[0]:"";
+  var em=EM[p.cat]||EM.def;
+  var cat=cn(p.cat);
+  var addL=lang==="ar"?AR.addCartLbl:"Add to Cart";
+  var specL=lang==="ar"?AR.specTitle:"Specifications";
+
+  t("PDC",cat);t("addCartLbl",addL);t("specTitle",specL);
+
+  var main=document.getElementById("PDMAIN");
+  main.innerHTML=img0?"<img src='"+img0+"' alt='' style='width:100%;height:100%' onerror='this.parentElement.innerHTML=\"<div class=pfbk>"+em+"</div>\"'>":"<div class='pfbk'>"+em+"</div>";
+
+  var thumbsEl=document.getElementById("PDTHUMBS");
+  if(p.imgs&&p.imgs.length>1){
+    thumbsEl.innerHTML=p.imgs.map(function(url,i){return "<div class='pd-thumb"+(i===0?" on":"")+"' onclick='switchImg(\""+url+"\",this)'><img src='"+url+"' loading='lazy' onerror='this.parentElement.style.display=\"none\"'></div>";}).join("");
+    thumbsEl.style.display="flex";
+  }else{thumbsEl.innerHTML="";thumbsEl.style.display="none";}
+
+  var bdgs=[];
+  if(p.flash)bdgs.push("<span class='pbdg pbdg-s'>\u26A1 Sale</span>");
+  if(p.feat)bdgs.push("<span class='pbdg pbdg-h'>\uD83D\uDD25 Featured</span>");
+  if(d>=25)bdgs.push("<span class='pbdg pbdg-n'>-"+d+"%</span>");
+  s("PDBDGS",bdgs.join(""));
+  t("PDNM",n);
+  s("PDMT","<span class='pstars'>"+st+"</span><span class='pratev'>"+p.rating.toFixed(1)+"</span><span class='pratec'>("+p.reviews.toLocaleString()+")</span><span class='psold'>"+p.sold.toLocaleString()+" "+(lang==="ar"?AR.sold:"sold")+"</span>");
+  s("PDPR","<span class='pd-now'>$"+p.price.toFixed(2)+"</span><span class='pd-was'>$"+p.was.toFixed(2)+"</span>"+(d>0?"<span class='pd-sv'>Save "+d+"%</span>":""));
+
+  var desc=lang==="ar"?p.desc_ar:p.desc;
+  t("PDDSC",desc);
+
+  var bullets=p.bullets||[];
+  s("PDBUL",bullets.map(function(b){return "<li>"+b+"</li>";}).join(""));
+
+  var specs=p.specs||[];
+  s("PDSP",specs.map(function(sp){return "<div class='pd-spec'><div class='pd-sl'>"+sp[0]+"</div><div class='pd-sv2'>"+sp[1]+"</div></div>";}).join(""));
+
+  var low=p.stock<=20;
+  var stockMsg=low?"\u26A0\uFE0F "+p.stock+" "+(lang==="ar"?AR.lowstock:"left!"):"\u2705 "+(lang==="ar"?AR.instock:"In Stock \u2014 Ready to ship");
+  s("PDSTK","<span class='pd-dot "+(low?"low":"ok")+"'></span><span>"+stockMsg+"</span>");
+  t("PDWSH",wish.has(p.id)?"\u2764\uFE0F":"\uD83E\uDD0D");
+
+  document.getElementById("PDOV").classList.add("on");
+  document.body.style.overflow="hidden";
+}
+
+function switchImg(url,thumb){
+  document.getElementById("PDMAIN").innerHTML="<img src='"+url+"' style='width:100%;height:100%'>";
+  document.querySelectorAll(".pd-thumb").forEach(function(th){th.classList.remove("on");});
+  thumb.classList.add("on");
+}
+
+function closePd(){document.getElementById("PDOV").classList.remove("on");document.body.style.overflow="";}
+function pdAdd(){if(curP){addCart(curP.id);}}
+function pdWish(){if(curP){tWish(curP.id,document.getElementById("PDWSH"));}}
+
+function addCart(id){
+  var p=all.find(function(x){return x.id===id;});if(!p)return;
+  var ex=cart.find(function(x){return x.id===id;});
+  if(ex){ex.qty++;}else{cart.push({id:id,name:p.name,name_ar:p.name_ar,price:p.price,cat:p.cat,img:p.imgs&&p.imgs[0]?p.imgs[0]:"",qty:1});}
+  saveCart();updateCart();
+  var n=nm(p);
+  showToast("\uD83D\uDED2",n.substring(0,24)+" \u2014 "+(lang==="ar"?AR.addedMsg:"Added to cart \u2713"),"ok");
+}
+
+function changeQty(id,delta){
+  var i=cart.find(function(x){return x.id===id;});if(!i)return;
+  i.qty+=delta;
+  if(i.qty<=0)cart=cart.filter(function(x){return x.id!==id;});
+  saveCart();updateCart();renderCart();
+}
+
+function saveCart(){try{localStorage.setItem("dscart",JSON.stringify(cart));}catch(e){}}
+
+function updateCart(){
+  var tot=cart.reduce(function(s,x){return s+x.qty;},0);
+  var cc=document.getElementById("CC"),nb=document.getElementById("NB");
+  if(cc)cc.textContent=tot;
+  if(nb){nb.textContent=tot;nb.style.display=tot>0?"flex":"none";}
+  updTots();
+}
+
+function updTots(){
+  var sub=cart.reduce(function(s,x){return s+(x.price*x.qty);},0);
+  var sh=sub>=50?0:4.99;var dv=sub*disc;var tt=Math.max(0,sub+sh-dv);
+  var se=document.getElementById("TS"),she=document.getElementById("TSH"),te=document.getElementById("TT");
+  if(se)se.textContent="$"+sub.toFixed(2);
+  if(she)she.textContent=sh===0?(lang==="ar"?AR.freeShip:"Free Shipping \uD83C\uDF81"):"$"+sh.toFixed(2);
+  if(te)te.textContent="$"+tt.toFixed(2);
+}
+
+function openCart(){document.getElementById("DR").classList.add("on");document.getElementById("OV").classList.add("on");renderCart();}
+function closeCart(){document.getElementById("DR").classList.remove("on");document.getElementById("OV").classList.remove("on");}
+function closeAll(){closeCart();closePd();closeCk();}
+
+function renderCart(){
+  var empMsg=lang==="ar"?AR.emp:"Your cart is empty";
+  var empSub=lang==="ar"?AR.emps:"Add products to start shopping";
+  if(!cart.length){s("DB","<div class='cempty'><span class='cei'>\uD83D\uDED2</span><p>"+empMsg+"</p><span>"+empSub+"</span></div>");return;}
+  var html=[];
+  cart.forEach(function(item){
+    var n=lang==="ar"&&item.name_ar?item.name_ar:item.name;
+    html.push("<div class='citem'><div class='cimg'>"+(item.img?"<img src='"+item.img+"' alt='' onerror='this.style.display=\"none\"'>":"")+(EM[item.cat]||"\uD83D\uDCE6")+"</div>");
+    html.push("<div class='cinfo'><div class='cname'>"+n.substring(0,28)+"</div><div class='cprice'>$"+(item.price*item.qty).toFixed(2)+"</div></div>");
+    html.push("<div class='cqty'><button class='cqb' onclick='changeQty(\""+item.id+"\",-1)'>-</button><span class='cqn'>"+item.qty+"</span><button class='cqb' onclick='changeQty(\""+item.id+"\",1)'>+</button></div></div>");
+  });
+  s("DB",html.join(""));updTots();
+}
+
+function applyCpn(){
+  var code=document.getElementById("CPN").value.trim().toUpperCase();
+  var codes={SAVE20:.20,WELCOME10:.10,DROP15:.15};
+  if(codes[code]){disc=codes[code];updTots();showToast("\uD83C\uDF89",code+" \u2014 "+(lang==="ar"?AR.cpnOk:"Discount applied \u2713"),"ok");}
+  else{showToast("\u274C",lang==="ar"?AR.cpnErr:"Invalid coupon code","er");}
+}
+
+function goCk(){
+  if(!cart.length){showToast("\u26A0\uFE0F",lang==="ar"?AR.cartEmp:"Cart is empty","wn");return;}
+  closeCart();
+  var sub=cart.reduce(function(s,x){return s+(x.price*x.qty);},0);
+  var sh=sub>=50?0:4.99;var dv=sub*disc;var tt=Math.max(0,sub+sh-dv);
+  var subL=lang==="ar"?AR.subLbl:"Subtotal";var shipL=lang==="ar"?AR.shipLbl:"Shipping";var totL=lang==="ar"?AR.totLbl:"Total";
+  var freeS=lang==="ar"?AR.freeShip:"Free";
+  var rows=cart.map(function(i){var n=lang==="ar"&&i.name_ar?i.name_ar:i.name;return "<div class='ositem'><span>"+n.substring(0,22)+" \u00D7"+i.qty+"</span><span>$"+(i.price*i.qty).toFixed(2)+"</span></div>";}).join("");
+  s("OSUM","<div class='ostitle'>"+subL+"</div>"+rows+"<div class='ositem'><span>"+shipL+"</span><span>"+(sh===0?freeS:"$"+sh.toFixed(2))+"</span></div>"+(dv>0?"<div class='ositem' style='color:var(--gn)'><span>Discount</span><span>-$"+dv.toFixed(2)+"</span></div>":"")+"<div class='ostot'><span>"+totL+"</span><span>$"+tt.toFixed(2)+"</span></div>");
+  document.getElementById("CKOV").classList.add("on");document.body.style.overflow="hidden";
+}
+
+function closeCk(){document.getElementById("CKOV").classList.remove("on");document.body.style.overflow="";}
+
+function doPP(){
+  var n=document.getElementById("CKN").value.trim();
+  var e=document.getElementById("CKE").value.trim();
+  var a=document.getElementById("CKA").value.trim();
+  if(!n||!e||!a){showToast("\u26A0\uFE0F",lang==="ar"?AR.ckFill:"Please fill in all fields","wn");return;}
+  showToast("\uD83D\uDCB3",lang==="ar"?AR.ckSend:"Redirecting to PayPal...","ok");
+  setTimeout(function(){
+    closeCk();
+    fetch("https://dropstore-backend-production.up.railway.app/api/orders/checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:cart.map(function(i){return{productId:i.id,quantity:i.qty};}),shippingAddress:{name:n,address:a},guestEmail:e,guestName:n,couponCode:disc>0?document.getElementById("CPN").value.trim().toUpperCase():null})})
+    .then(function(r){return r.json();}).then(function(d){if(d.approveUrl){window.location.href=d.approveUrl;}else{showToast("\u2705",lang==="ar"?AR.ckOk:"Order received! We'll contact you soon.","ok");cart=[];disc=0;saveCart();updateCart();}})
+    .catch(function(){showToast("\u2705",lang==="ar"?AR.ckOk:"Order received! We'll contact you soon.","ok");cart=[];disc=0;saveCart();updateCart();});
+  },1200);
+}
+
+function tWish(id,btn){
+  wish.has(id)?wish.delete(id):wish.add(id);
+  try{localStorage.setItem("dswish",JSON.stringify(Array.from(wish)));}catch(e){}
+  if(btn){btn.textContent=wish.has(id)?"\u2764\uFE0F":"\uD83E\uDD0D";btn.classList.toggle("on",wish.has(id));}
+  showToast(wish.has(id)?"\u2764\uFE0F":"\uD83D\uDC94",lang==="ar"?AR[wish.has(id)?"wishAdd":"wishRem"]:(wish.has(id)?"Added to wishlist":"Removed from wishlist"),"ok");
+}
+
+function filterCat(c,el){
+  document.querySelectorAll(".catbtn").forEach(function(b){b.classList.remove("on");});
+  if(el)el.classList.add("on");
+  filtered=(!c||c==="all")?all.slice():all.filter(function(p){return p.cat===c;});
+  renderProds(filtered);
+}
+function sortP(v){
+  var a=filtered.slice();
+  if(v==="pa")a.sort(function(x,y){return x.price-y.price;});
+  else if(v==="pd")a.sort(function(x,y){return y.price-x.price;});
+  else if(v==="r")a.sort(function(x,y){return y.rating-x.rating;});
+  else if(v==="s")a.sort(function(x,y){return y.sold-x.sold;});
+  renderProds(a);
+}
+function lsrch(q){
+  if(!q){renderProds(filtered);return;}
+  var lq=q.toLowerCase();
+  renderProds(all.filter(function(p){return p.name.toLowerCase().includes(lq)||p.name_ar.includes(q)||cn(p.cat).toLowerCase().includes(lq);}));
+}
+function dosrch(){var q=document.getElementById("SI").value.trim();if(!q)return;lsrch(q);goProds();}
+function goProds(){var e=document.getElementById("PS");if(e)window.scrollTo({top:e.offsetTop-70,behavior:"smooth"});}
+
+function initSlider(){
+  var ss=document.querySelectorAll(".hslide"),d=document.getElementById("HD");if(!d)return;
+  var dots=[];for(var i=0;i<ss.length;i++){dots.push("<button class='hdot"+(i===0?" on":"")+"' onclick='goSlide("+i+")'></button>");}
+  d.innerHTML=dots.join("");
+  setInterval(function(){goSlide((slide+1)%ss.length);},5000);
+}
+function goSlide(n){slide=n;document.querySelectorAll(".hslide").forEach(function(sl,i){sl.classList.toggle("on",i===n);});document.querySelectorAll(".hdot").forEach(function(dt,i){dt.classList.toggle("on",i===n);});}
+
+function initTimer(){
+  var end=new Date(Date.now()+8*3600000+34*60000);
+  setInterval(function(){
+    var df=end-new Date();if(df<=0)return;
+    var h=document.getElementById("FH"),m=document.getElementById("FM"),ss=document.getElementById("FS");
+    if(h)h.textContent=String(Math.floor(df/3600000)).padStart(2,"0");
+    if(m)m.textContent=String(Math.floor((df%3600000)/60000)).padStart(2,"0");
+    if(ss)ss.textContent=String(Math.floor((df%60000)/1000)).padStart(2,"0");
+  },1000);
+}
+
+function initChat(){
+  var ms=document.getElementById("CHMS"),qa=document.getElementById("CHQA");
+  var greet=lang==="ar"?"\u0645\u0631\u062D\u0628\u0627\u064B! \uD83D\uDC4B \u0623\u0646\u0627 \u0645\u0633\u0627\u0639\u062F DropStore. \u0643\u064A\u0641 \u0623\u0633\u0627\u0639\u062F\u0643\u061F":"Hello! \uD83D\uDC4B I'm the DropStore assistant. How can I help you today?";
+  ms.innerHTML="<div class='msg bot'>"+greet+"</div>";
+  var qs,ak;
+  if(lang==="ar"){qs=[AR.qdis,AR.qship,AR.qret,AR.qpay,AR.qcon];ak=["adis","aship","aret","apay","acon"];}
+  else{qs=["Discount codes?","Shipping time?","Return policy?","Payment methods?","Contact info?"];ak=["dis_e","shp_e","ret_e","pay_e","con_e"];}
+  qa.innerHTML=qs.map(function(q,i){return "<button class='chatqa' onclick='askQ(\""+ak[i]+"\")'>"+q+"</button>";}).join("");
+}
+
+var chatAns={
+  adis:null,aship:null,aret:null,apay:null,acon:null,
+  dis_e:"We have 3 codes: SAVE20 (20% off), WELCOME10 (10% off), DROP15 (15% off). Use them at checkout!",
+  shp_e:"Shipping takes 5-7 business days. Free shipping on orders over $50.",
+  ret_e:"Free returns within 30 days of receiving your order. Email us to start.",
+  pay_e:"We accept PayPal and all major credit cards. All payments are fully encrypted.",
+  con_e:"dropstore.hello@gmail.com \u2014 We reply within 24 hours."
+};
+
+function openChat(){document.getElementById("CHW").classList.add("on");chatOn=true;scrollChat();}
+function toggleChat(){chatOn=!chatOn;document.getElementById("CHW").classList.toggle("on",chatOn);if(chatOn)scrollChat();}
+
+function askQ(key){
+  var ms=document.getElementById("CHMS");
+  var ans;
+  if(key.includes("_e")){ans=chatAns[key];}else{ans=AR[key]||AR.afall;}
+  var qmap={adis:AR.qdis,aship:AR.qship,aret:AR.qret,apay:AR.qpay,acon:AR.qcon,dis_e:"Discount codes?",shp_e:"Shipping time?",ret_e:"Return policy?",pay_e:"Payment methods?",con_e:"Contact info?"};
+  ms.innerHTML+="<div class='msg usr'>"+(qmap[key]||key)+"</div>";
+  scrollChat();
+  setTimeout(function(){ms.innerHTML+="<div class='msg bot'>"+ans+"</div>";scrollChat();},600);
+}
+
+function sendMsg(){
+  var inp=document.getElementById("CHI"),q=inp.value.trim();if(!q)return;
+  var ms=document.getElementById("CHMS");
+  ms.innerHTML+="<div class='msg usr'>"+q+"</div>";
+  inp.value="";scrollChat();
+  var lq=q.toLowerCase();var ans;
+  if(lq.includes("discount")||lq.includes("code")||lq.includes("\u062E\u0635\u0645")||lq.includes("\u0643\u0648\u062F")){ans=lang==="ar"?AR.adis:chatAns.dis_e;}
+  else if(lq.includes("ship")||lq.includes("deliver")||lq.includes("\u0634\u062D\u0646")||lq.includes("\u062A\u0648\u0635\u064A\u0644")){ans=lang==="ar"?AR.aship:chatAns.shp_e;}
+  else if(lq.includes("return")||lq.includes("refund")||lq.includes("\u0627\u0631\u062C\u0627\u0639")||lq.includes("\u0625\u0631\u062C\u0627\u0639")){ans=lang==="ar"?AR.aret:chatAns.ret_e;}
+  else if(lq.includes("pay")||lq.includes("\u062F\u0641\u0639")){ans=lang==="ar"?AR.apay:chatAns.pay_e;}
+  else if(lq.includes("contact")||lq.includes("email")||lq.includes("\u062A\u0648\u0627\u0635\u0644")||lq.includes("\u0627\u064A\u0645\u064A\u0644")){ans=lang==="ar"?AR.acon:chatAns.con_e;}
+  else{ans=lang==="ar"?AR.afall:"For help contact: dropstore.hello@gmail.com \u2014 We reply within 24 hours.";}
+  setTimeout(function(){ms.innerHTML+="<div class='msg bot'>"+ans+"</div>";scrollChat();},700);
+}
+
+function scrollChat(){var ms=document.getElementById("CHMS");if(ms)ms.scrollTop=ms.scrollHeight;}
+
+function showToast(ico,msg,type){
+  var el=document.createElement("div");el.className="toast "+(type||"");
+  el.innerHTML="<span>"+ico+"</span><span>"+msg+"</span>";
+  var w=document.getElementById("TW");
+  if(w){w.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},3200);}
+}
+
+
+// iOS Install Prompt
+if(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream){
+  document.addEventListener('DOMContentLoaded', function(){
+    // Detect if running as standalone PWA
+    if(!window.navigator.standalone){
+      setTimeout(function(){
+        showToast('📱', 'Tap Share → Add to Home Screen to install DropStore app!','wn');
+      }, 3000);
+    }
+  });
+}
+</script>
+</body>
+</html>
