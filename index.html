@@ -477,6 +477,38 @@ var AR={"a1": "&#127873; شحن مجاني للطلبات فوق $50", "a2": "ك
 
 var EM={health:"\uD83D\uDC9A",tech:"\uD83D\uDCF1",beauty:"\u2728",home:"\uD83C\uDFE0",sports:"\uD83C\uDFCB\uFE0F",def:"\uD83D\uDCE6"};
 var lang="en",all=P.slice(),filtered=P.slice(),cart=[],wish=new Set(),disc=0,slide=0,curP=null,chatOn=false;
+  // Fetch products from backend
+fetch('https://dropstore-backend-production.up.railway.app/api/products?limit=50')
+  .then(r=>r.json())
+  .then(data=>{
+    if(data && data.length > 0){
+      data.forEach(p=>{
+        P.push({
+          id: p.id,
+          name: p.name,
+          name_ar: p.name,
+          cat: p.tags?.[0] || 'health',
+          price: parseFloat(p.price),
+          was: parseFloat(p.compare_price),
+          rating: parseFloat(p.rating) || 4.5,
+          reviews: p.review_count || 500,
+          sold: p.sold_count || 100,
+          stock: p.stock || 100,
+          flash: p.is_flash_sale || false,
+          feat: false,
+          desc: p.description || p.name,
+          desc_ar: p.description || p.name,
+          bullets: ['High Quality', 'Fast Shipping', '30-Day Returns'],
+          specs: [['Weight', p.weight+'kg'], ['Stock', p.stock+' units']],
+          imgs: p.images || ['https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=85']
+        });
+      });
+      all=P.slice();
+      filtered=P.slice();
+      if(typeof render==='function') render();
+    }
+  })
+  .catch(e=>console.log('Backend fetch failed:', e));
 try{cart=JSON.parse(localStorage.getItem("dscart")||"[]");}catch(e){cart=[];}
 try{wish=new Set(JSON.parse(localStorage.getItem("dswish")||"[]"));}catch(e){wish=new Set();}
 
