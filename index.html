@@ -505,7 +505,7 @@ fetch('https://dropstore-backend-production.up.railway.app/api/products?limit=50
       });
       all=P.slice();
       filtered=P.slice();
-      if(typeof render==='function') render();
+      if(typeof renderProds==='function') renderProds(filtered);
     }
   })
   .catch(e=>console.log('Backend fetch failed:', e));
